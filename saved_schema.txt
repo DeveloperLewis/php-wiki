@@ -1,0 +1,160 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jul 30, 2022 at 01:12 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: `wiki`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `article`
+--
+
+CREATE TABLE `article` (
+  `article_id` int(11) NOT NULL,
+  `title` varchar(128) DEFAULT NULL,
+  `body` mediumtext DEFAULT NULL,
+  `notes` varchar(10000) NOT NULL,
+  `original_author` int(11) DEFAULT NULL,
+  `shared` bit(1) DEFAULT NULL,
+  `creation_date` datetime NOT NULL,
+  `last_edited_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_edited_by_author` int(11) NOT NULL,
+  `template_type` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(25) NOT NULL,
+  `article_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contributions`
+--
+
+CREATE TABLE `contributions` (
+  `contribution_id` int(11) NOT NULL,
+  `article_id` int(11) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `uid` int(11) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `email` varchar(320) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `is_admin` bit(1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`article_id`),
+  ADD KEY `original_author` (`original_author`),
+  ADD KEY `last_edited_by_author` (`last_edited_by_author`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`category_id`),
+  ADD KEY `article_id` (`article_id`);
+
+--
+-- Indexes for table `contributions`
+--
+ALTER TABLE `contributions`
+  ADD PRIMARY KEY (`contribution_id`),
+  ADD KEY `uid` (`uid`),
+  ADD KEY `article_id` (`article_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`uid`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `article`
+--
+ALTER TABLE `article`
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contributions`
+--
+ALTER TABLE `contributions`
+  MODIFY `contribution_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `article`
+--
+ALTER TABLE `article`
+  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`original_author`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `article_ibfk_2` FOREIGN KEY (`last_edited_by_author`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `categories`
+--
+ALTER TABLE `categories`
+  ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`article_id`) REFERENCES `article` (`article_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `contributions`
+--
+ALTER TABLE `contributions`
+  ADD CONSTRAINT `contributions_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `contributions_ibfk_2` FOREIGN KEY (`article_id`) REFERENCES `article` (`article_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+COMMIT;

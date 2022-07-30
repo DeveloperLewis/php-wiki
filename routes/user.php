@@ -1,6 +1,4 @@
 <?php
-
-
  /* @var $router */
 
 
@@ -13,6 +11,10 @@ $router->post('/user/register', function() {
 });
 
 $router->get('/user/login', function() {
+    require_once('controllers/user/user_login.php');
+});
+
+$router->post('/user/login', function() {
     require_once('controllers/user/user_login.php');
 });
 

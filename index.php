@@ -23,5 +23,6 @@ $router->notFound(function() {
 //User routes
 require_once('routes/user.php');
 require_once('routes/article.php');
+require_once('routes/admin.php');
 
 $router->run();

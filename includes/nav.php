@@ -1,5 +1,5 @@
-<div class="container">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
   <a class="navbar-brand" href="#">MVC</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -33,12 +33,12 @@
       if(isset($_SESSION['uid'])) {
           if (\classes\models\user\User::isAdmin($_SESSION['uid'])) {
               echo '<li class="nav-item">';
-              echo '<a class="nav-link" href="/user/admin">Admin Panel</a>';
+              echo '<a class="nav-link" href="/admin/dashboard">Admin Panel</a>';
               echo '</li>';
           }
       }
       ?>
     </ul>
-  </div>
+        </div>
+    </div>
 </nav>
-</div>
