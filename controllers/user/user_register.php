@@ -125,8 +125,9 @@
 
         $password = $_POST['password'];
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $isAdmin = false;
 
-        $user = new \classes\models\user\User($name, $email, $hashed_password);
+        $user = new \classes\models\user\User($name, $email, $hashed_password, $isAdmin);
         $result = $user->store();
 
         if ($result === false) {

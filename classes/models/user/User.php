@@ -34,7 +34,7 @@ namespace classes\models\user;
             $stmt->bindParam(1, $this->firstName, \PDO::PARAM_STR);
             $stmt->bindParam(2, $this->email, \PDO::PARAM_STR);
             $stmt->bindParam(3, $this->password, \PDO::PARAM_STR);
-            $stmt->bindParam(4, $this->isAdmin, \PDO::PARAM_STR);
+            $stmt->bindParam(4, $this->isAdmin, \PDO::PARAM_BOOL);
             
             if (!$stmt->execute()) {
                 return false;
@@ -68,12 +68,12 @@ namespace classes\models\user;
         }
 
         //Return a user object
-        public static function getName($uid): bool|string {
+        public static function getName($uid): bool|array {
             $database = new \classes\Database();
             $pdo = $database->getPdo();
             
             $stmt = $pdo->prepare("SELECT first_name FROM users WHERE uid = ?");
-            $stmt->bindParam(1, $uid, \PDO::PARAM_STR);
+            $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
 
             if (!$stmt->execute()) {
                 return false;
@@ -87,12 +87,12 @@ namespace classes\models\user;
         }
 
         //Return the date of which the user was created at.
-        public static function getCreatedAt($uid): bool|string {
+        public static function getCreatedAt($uid): bool|array {
             $database = new \classes\Database();
             $pdo = $database->getPdo();
             
             $stmt = $pdo->prepare("SELECT created_at FROM users WHERE uid = ?");
-            $stmt->bindParam(1, $uid, \PDO::PARAM_STR);
+            $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
 
             if (!$stmt->execute()) {
                 return false;
@@ -121,5 +121,30 @@ namespace classes\models\user;
             }
 
             return false;
+        }
+
+        public static function isAdmin($uid): bool|string {
+            $database = new \classes\Database();
+            $pdo = $database->getPdo();
+
+            $stmt = $pdo->prepare("SELECT is_admin FROM users WHERE uid = ?");
+            $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
+
+            if (!$stmt->execute()) {
+                return "execute failed";
+            }
+
+            if (!$result = $stmt->fetch()) {
+                return "fetch failed";
+            }
+
+            if ($result['is_admin'] == 0) {
+                return false;
+            }
+            else if ($result['is_admin'] == 1) {
+                return true;
+            }
+
+            return "function failed";
         }
     }

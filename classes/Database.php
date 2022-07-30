@@ -6,7 +6,7 @@ namespace classes;
 
         private $type = 'mysql';
         private $server = 'localhost';
-        private $db = 'framework';
+        private $db = 'wiki';
         private $port = '3306';
         private $charset = 'utf8mb4';
 

@@ -29,6 +29,14 @@
         echo '<a class="nav-link" href="/user/logout">Logout</a>';
         echo '</li>';
       }
+
+      if(isset($_SESSION['uid'])) {
+          if (\classes\models\user\User::isAdmin($_SESSION['uid'])) {
+              echo '<li class="nav-item">';
+              echo '<a class="nav-link" href="/user/admin">Admin Panel</a>';
+              echo '</li>';
+          }
+      }
       ?>
     </ul>
   </div>
