@@ -56,11 +56,7 @@ class Validation
             $body_errors['max_size'] = "The body must be less than 5000000 characters. You're currently at: " . strlen($body) . ".";
         }
 
-        if($body != strip_tags($body)) {
-            $body_errors['html'] = "You cannot use HTML, please use markdown instead. Here is a guide on how to use it: https://www.markdownguide.org/basic-syntax/";
-        }
-
-        if (preg_match('/[^a-zA-Z\d#\-=.,:;/_*@!\[\]\(\)`<>]/', $body)) {
+        if (preg_match('/[^a-zA-Z\d#\-=.,:;/_*@!\[\]()`<>]/', $body)) {
             $body_errors['special_chars'] = "The body can only contain letters, numbers and these
             special characters: #-=.,:;/_*@![]()`<>";
         }
@@ -108,17 +104,42 @@ class Validation
 
     }
 
-    function purifyHtml(string $string): string {
-        $config = \HTMLPurifier_config::createDefault();
-        $purifier = new HTMLPurifier($config);
-        $purified_Html = $purifier->purify($string);
+    function category(string $category): array|bool {
 
-        return $purified_Html;
+        //Initialize the array.
+        $category_errors = [];
+
+        //Validation Rules.
+        if (empty($category)) {
+            $category_errors = "The category cannot be empty!";
+        }
+
+        if (strlen($category < 1)) {
+            $category_errors['min_size'] = "The category must be greater than 1 character. You're currently at: " . strlen($category) . ".";
+        }
+
+        if (strlen($category > 25)) {
+            $category_errors['min_size'] = "The category must be less than  25 characters. You're currently at: " . strlen($category) . ".";
+        }
+
+        if (preg_match('/[^a-zA-Z\-]/', $category)) {
+            $category_errors['special_chars'] = "The category can only contain
+             letters and the character: -";
+        }
+
+        //Return the array if there are any errors.
+        if (!empty($category_errors)) {
+            return $category_errors;
+        }
+
+        //Return true if there aren't any errors.
+        return true;
     }
 
+    function purifyHtml(string $string): string {
+        $config = \HTMLPurifier_config::createDefault();
+        $purifier = new \HTMLPurifier($config);
 
-    //TODO: Sanitize the markdown and display it as html or something
-
-    //TODO: Validate catagories;
-
+        return $purifier->purify($string);
+    }
 }

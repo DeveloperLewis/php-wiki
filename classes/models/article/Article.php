@@ -13,8 +13,9 @@ class Article
     public string $last_edited_date; //optional
     public int $last_edited_by_author; //optional
     public string $template; //required
+    public array $categories; //optional
 
-    public function __construct($title, $body, $original_author, $shared, $creation_date, $template) {
+    public function __construct($title, $body, $original_author, $shared, $creation_date, $template, $categories) {
         $this->title = $title;
         $this->body = $body;
         $this->original_author = $original_author;
