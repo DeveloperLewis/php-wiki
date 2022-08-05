@@ -108,6 +108,15 @@ class Validation
 
     }
 
+    function purifyHtml(string $string): string {
+        $config = \HTMLPurifier_config::createDefault();
+        $purifier = new HTMLPurifier($config);
+        $purified_Html = $purifier->purify($string);
+
+        return $purified_Html;
+    }
+
+
     //TODO: Sanitize the markdown and display it as html or something
 
     //TODO: Validate catagories;
