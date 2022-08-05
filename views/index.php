@@ -22,15 +22,6 @@
         ?>
         </div>
         <div class="col-4">
-            <?php
-
-            $validator = new classes\validation();
-
-            $text =
-
-            $newtext = $validator->sanitizeHTML();
-            ?>
-
         </div>
     </div>
 

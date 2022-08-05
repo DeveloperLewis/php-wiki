@@ -9,3 +9,7 @@ $router->get('/admin/dashboard', function() {
 $router->get('/admin/articles', function() {
     require_once('controllers/admin/admin_dashboard.php');
 });
+
+$router->get('/admin/categories', function() {
+    require_once('controllers/admin/admin_dashboard.php');
+});
