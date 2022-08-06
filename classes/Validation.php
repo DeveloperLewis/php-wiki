@@ -48,11 +48,11 @@ class Validation
             $body_errors['empty'] = "The body content cannot be empty!";
         }
 
-        if (strlen($body < 100)) {
+        if (strlen($body) < 100) {
             $body_errors['min_size'] = "The body must be more than 100 characters. You're currently at: " . strlen($body) . ".";
         }
 
-        if (strlen($body > 5000000)) {
+        if (strlen($body) > 5000000) {
             $body_errors['max_size'] = "The body must be less than 5000000 characters. You're currently at: " . strlen($body) . ".";
         }
 
@@ -81,11 +81,11 @@ class Validation
             $notes_errors['empty'] = "The notes content cannot be empty!";
         }
 
-        if (strlen($notes < 50)) {
+        if (strlen($notes) < 50) {
             $notes_errors['min_size'] = "The notes must contain more than 100 characters. You're currently at: " . strlen($notes) . ".";
         }
 
-        if (strlen($notes > 10000)) {
+        if (strlen($notes) > 10000) {
             $notes_errors['max_size'] = "The notes must be less than 10000 characters. You're currently at: " . strlen($notes) . ".";
         }
 
@@ -114,12 +114,12 @@ class Validation
             $category_errors = "The category cannot be empty!";
         }
 
-        if (strlen($category < 1)) {
+        if (strlen($category) < 1) {
             $category_errors['min_size'] = "The category must be greater than 1 character. You're currently at: " . strlen($category) . ".";
         }
 
-        if (strlen($category > 25)) {
-            $category_errors['min_size'] = "The category must be less than  25 characters. You're currently at: " . strlen($category) . ".";
+        if (strlen($category) > 25) {
+            $category_errors['min_size'] = "The category must be less than 25 characters. You're currently at: " . strlen($category) . ".";
         }
 
         if (preg_match('/[^a-zA-Z\-]/', $category)) {

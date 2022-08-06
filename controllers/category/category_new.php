@@ -6,7 +6,27 @@ if (isset($_SESSION['uid'])) {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require_once('views/admin/dashboard.php');
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //some code to process storing the new category
+            //Check if the category name meets the validation requirements, if not
+            //then get the returned array and send it through for errors.
+            $validation = new \classes\Validation();
+            $validation_result = $validation->category($_POST['name']);
+
+            if (is_array($validation_result)) {
+                session_start();
+                $_SESSION['errors'] = $validation_result;
+                $_SESSION['previous'] = $_POST['name'];
+                header('Location: /category/new');
+                die();
+            }
+
+            $category = new \classes\models\article\Category($_POST['name']);
+            $category->store();
+
+            session_start();
+            $_SESSION['success'] = "Successfully added a new category.";
+            header('Location: /admin/categories');
+            die();
+
         } else {
             header('Location: /');
             die();

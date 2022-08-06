@@ -1,29 +1,49 @@
 <div id="categories-panel">
     <div class="card">
         <div class="m-4">
-            <div class="card">
-                <h2 class="text-center">All Categories</h2>
-            </div>
-
-            <div class="mt-4">
                 <div class="row">
-                    <div class="col-4">
-                        <p class="btn btn-info text-white" style="width: 100%;">People</p>
-                        <p class="btn btn-info text-white" style="width: 100%;">Castles</p>
-                    </div>
-
-                    <div class="col-4">
-                        <p class="btn btn-info text-white" style="width: 100%;">Castles</p>
-                        <p class="btn btn-info text-white" style="width: 100%;">Castles</p>
+                    <div class="col-3">
 
                     </div>
+                    <div class="col-6">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col" class="text-center">Categories</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
 
-                    <div class="col-4">
-                        <p class="btn btn-info text-white" style="width: 100%;">Castles</p>
-                        <p class="btn btn-info text-white" style="width: 100%;">Castles</p>
+                                if (!$categories_array = \classes\models\article\Category::getAll()) {
+                                    echo '<div class="alert alert-danger" role="alert">';
+                                    echo "Fetch for categories failed or none exist, try creating a new category!";
+                                    echo '</div>';
+                                }
+
+                                else {
+                                    foreach ($categories_array as $k => $v) {
+                                        echo '<tr class="text-center">';
+                                        echo '<td class="text-center">' . $v['category_name'] . '</td>';
+                                        echo '</tr>';
+                                    }
+                                }
+
+                                if (isset($_SESSION['success'])) {
+                                    echo '<div class="alert alert-success" role="alert">';
+                                    echo $_SESSION['success'];
+                                    echo '</div>';
+                                    unset($_SESSION['success']);
+                                }
+
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-3">
+
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 

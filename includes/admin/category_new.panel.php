@@ -4,7 +4,19 @@
 
         </div>
         <div class="col-4">
-            <form method="/category/new" method="post">
+
+            <?php
+                if (isset($_SESSION['errors'])) {
+                    foreach ($_SESSION['errors'] as $k => $v) {
+                        echo '<div class="alert alert-danger" role="alert">';
+                        echo $v;
+                        echo '</div>';
+                    }
+                    unset($_SESSION['errors']);
+                }
+            ?>
+
+            <form action="/category/new" method="post">
                 <label>Category Name: </label>
                 <input type="text" class="form-control" name="name">
 
