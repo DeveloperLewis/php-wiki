@@ -18,7 +18,12 @@
 
             <form action="/category/new" method="post">
                 <label>Category Name: </label>
-                <input type="text" class="form-control" name="name">
+                <input type="text" class="form-control" name="name" value="<?php
+                    if (isset($_SESSION['previous'])) {
+                        echo $_SESSION['previous'];
+                        unset($_SESSION['previous']);
+                    }
+                ?>">
 
                 <button class="btn btn-primary mt-2" type="submit">Create</button>
             </form>

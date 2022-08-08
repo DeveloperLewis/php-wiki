@@ -23,7 +23,7 @@ class Validation
             $title_errors['max_size'] = "The title cannot be more than 300 characters. You're currently at: " . strlen($title) . ".";
         }
 
-        if (preg_match('/[^A-z\d!?:\-.,]/', $title)) {
+        if (preg_match('/[^A-z\d!?:\-., ]/', $title)) {
             $title_errors['special_chars'] = "The title can only contain
              letters, numbers and the following special characters: !?:-.,";
         }
@@ -56,7 +56,7 @@ class Validation
             $body_errors['max_size'] = "The body must be less than 5000000 characters. You're currently at: " . strlen($body) . ".";
         }
 
-        if (preg_match('/[^a-zA-Z\d#\-=.,:;/_*@!\[\]()`<>]/', $body)) {
+        if (preg_match('/[^a-zA-Z\d#\-=.,:;/_*@!\[\]()`<> ]/', $body)) {
             $body_errors['special_chars'] = "The body can only contain letters, numbers and these
             special characters: #-=.,:;/_*@![]()`<>";
         }
@@ -77,19 +77,12 @@ class Validation
         $notes_errors = [];
 
         //Validation Rules.
-        if (empty($notes)) {
-            $notes_errors['empty'] = "The notes content cannot be empty!";
-        }
-
-        if (strlen($notes) < 50) {
-            $notes_errors['min_size'] = "The notes must contain more than 100 characters. You're currently at: " . strlen($notes) . ".";
-        }
 
         if (strlen($notes) > 10000) {
             $notes_errors['max_size'] = "The notes must be less than 10000 characters. You're currently at: " . strlen($notes) . ".";
         }
 
-        if (preg_match('/[^A-z\d!?:\-.,]/', $notes)) {
+        if (preg_match('/[^A-z\d!?:\-., ]/', $notes)) {
             $notes_errors['special_chars'] = "The notes can only contain
              letters, numbers and the following special characters: !?:-.,";
         }
@@ -114,15 +107,15 @@ class Validation
             $category_errors = "The category cannot be empty!";
         }
 
-        if (strlen($category) < 1) {
-            $category_errors['min_size'] = "The category must be greater than 1 character. You're currently at: " . strlen($category) . ".";
+        if (strlen($category) < 4) {
+            $category_errors['min_size'] = "The category must be greater than 3 character. You're currently at: " . strlen($category) . ".";
         }
 
         if (strlen($category) > 25) {
             $category_errors['min_size'] = "The category must be less than 25 characters. You're currently at: " . strlen($category) . ".";
         }
 
-        if (preg_match('/[^a-zA-Z\-]/', $category)) {
+        if (preg_match('/[^a-zA-Z\- ]/', $category)) {
             $category_errors['special_chars'] = "The category can only contain
              letters and the character: -";
         }
