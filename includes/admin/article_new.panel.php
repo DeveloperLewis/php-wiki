@@ -14,14 +14,6 @@
                 </select>
             </div>
 
-            <div class="col-2">
-                <label for="template" class="form-label">Template: </label>
-                <select class="form-select" id="template" name="template">
-                    <option>Character</option>
-                    <option>Place</option>
-                    <option>Item</option>
-                </select>
-            </div>
         </div>
 
         <div class="mb-2">
