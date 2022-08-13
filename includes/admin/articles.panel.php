@@ -5,26 +5,33 @@
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
-                <th scope="col">Contributors</th>
                 <th scope="col">Categories</th>
-                <th scope="col">Template</th>
                 <th scope="col">Date</th>
             </tr>
             </thead>
             <tbody>
+
             <?php
-            //TODO: Fill with real data, this is just a placeholder
-            for ($i = 0; $i<10; $i++) {
-                ?>
-                <tr>
-                    <td>Some article title</td>
-                    <td>Otto</td>
-                    <td>Max, Josh</td>
-                    <td>Castles, Characters</td>
-                    <td >Building</td>
-                    <td>19/03/1974</td>
-                </tr>
-            <?php } ?>
+
+            if (!$articles_array = \classes\models\article\Article::getAll($_SESSION['uid'])) {
+                echo '<div class="alert alert-danger" role="alert">';
+                echo "Fetch for categories failed or none exist, try creating a new category!";
+                echo '</div>';
+            }
+
+            else {
+                foreach ($articles_array as $k => $v) {
+                    echo '<tr>';
+                    echo '<td>' . $v['title'] . '</td>';
+                    //TODO: GET AUTHOR NAME BASED ON ID PROVIDED BY ARTICLES ARRAY
+                    echo '<td>' . '</td>';
+                    echo '<td>No categories found.</td>';
+                    //TODO: Fix the original date and use that instead
+                    echo '<td>' . $v['last_edited_date']. '</td>';
+                    echo '</tr>';
+                }
+            }
+            ?>
             </tbody>
         </table>
     </div>

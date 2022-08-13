@@ -43,4 +43,25 @@ class Article
         return true;
     }
 
+    public static function getAll($uid): bool|array {
+        $sql = "SELECT * FROM articles WHERE original_author = ?";
+
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetchAll()) {
+            return false;
+        }
+
+        return $result;
+
+    }
+
 }
