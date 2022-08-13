@@ -1,11 +1,12 @@
 <div id="categories-panel">
-    <div class="card">
+
         <div class="m-4">
                 <div class="row">
                     <div class="col-3">
 
                     </div>
                     <div class="col-6">
+                        <div class="card">
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
@@ -39,13 +40,13 @@
                             ?>
                             </tbody>
                         </table>
+                        </div>
                     </div>
                     <div class="col-3">
 
                     </div>
                 </div>
         </div>
-    </div>
 
     <div class="mt-4">
         <div class="row">
