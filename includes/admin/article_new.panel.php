@@ -3,7 +3,7 @@
         <div class="mb-2">
 
             <?php
-
+            //Display title errors here if there are any
             if (isset($_SESSION['title_errors'])) {
                 foreach ($_SESSION['title_errors'] as $k => $v) {
                     echo '<div class="alert alert-danger" role="alert">';
@@ -37,6 +37,7 @@
 
             <?php
 
+            //Display body errors here if there are any
             if (isset($_SESSION['body_errors'])) {
                 foreach ($_SESSION['body_errors'] as $k => $v) {
                     echo '<div class="alert alert-danger" role="alert">';
@@ -59,6 +60,7 @@
 
             <?php
 
+            //Display notes errors here if there are any
             if (isset($_SESSION['notes_errors'])) {
                 foreach ($_SESSION['notes_errors'] as $k => $v) {
                     echo '<div class="alert alert-danger" role="alert">';

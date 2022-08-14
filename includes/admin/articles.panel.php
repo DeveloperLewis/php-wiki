@@ -13,12 +13,14 @@
 
             <?php
 
+            //Display this if no articles exist
             if (!$articles_array = \classes\models\article\Article::getAll($_SESSION['uid'])) {
                 echo '<div class="alert alert-danger" role="alert">';
                 echo "Fetch for categories failed or none exist, try creating a new category!";
                 echo '</div>';
             }
 
+            //Display all articles in the table
             else {
                 foreach ($articles_array as $k => $v) {
                     echo '<tr onclick="sendToArticle('. $v['article_id'] . ')" style="cursor: pointer">';

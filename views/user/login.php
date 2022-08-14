@@ -19,6 +19,8 @@
         <div class="col-4 mt-4">
 
             <?php
+
+                //Display errors and then kill the sessions for them
                 if (isset($_SESSION['empty_errors'])) {
                     foreach ($_SESSION['empty_errors'] as $key => $val) {
                         echo '<div class="alert alert-danger" role="alert">';

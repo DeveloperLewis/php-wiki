@@ -1,7 +1,7 @@
 <?php
 function init() {
 
-    //Database connection configuration here
+    //Database connection configuration and connection
     $host = "localhost";
 
     $username = "root";
@@ -68,5 +68,5 @@ function init() {
 
 init();
 
-//Self destruct, never to be seen again.
+//Self-destruct, never to be seen again.
 unlink("init.php");

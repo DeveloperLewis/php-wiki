@@ -1,9 +1,9 @@
 <?php
 
-//Autoloading classes to create a router object.
+//Auto loading classes to create a router object.
 require_once('vendor/autoload.php');
 
-//Get the initalization script to create the database and tables. It will delete itself after it has ran.
+//Get the initialization script to create the database and tables. It will delete itself after it has run.
 if (file_exists('init.php')) {
     include_once('init.php');
 }
@@ -16,6 +16,7 @@ $router->get('/', function() {
     require_once('views/index.php');
 });
 
+//404 handler
 $router->notFound(function() {
     require_once('views/404.php');
 });
@@ -26,4 +27,5 @@ require_once('routes/article.php');
 require_once('routes/admin.php');
 require_once('routes/category.php');
 
+//Run the router after everything has processed
 $router->run();

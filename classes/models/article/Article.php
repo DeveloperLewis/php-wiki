@@ -6,14 +6,14 @@ use classes\Database;
 
 class Article
 {
-    public string $title; //required y
-    public string $body; //required y
-    public string $notes; //optional y
-    public int $original_author; //required y
-    public bool $shared; //required y
-    public string $creation_date; //required y
-    public int $last_edited_by_author; //optional
-    public array $categories; //optional
+    public string $title;
+    public string $body;
+    public string $notes;
+    public int $original_author;
+    public bool $shared;
+    public string $creation_date;
+    public int $last_edited_by_author;
+    public array $categories;
 
     public function __construct($title, $body, $original_author, $shared, $creation_date) {
         $this->title = $title;
@@ -23,13 +23,18 @@ class Article
         $this->creation_date = $creation_date;
     }
 
+    //Store the article in the database
     public function store(): bool {
         $sql = "INSERT INTO articles (title, body, original_author, shared, creation_date, notes, category_ids) VALUES (?,?,?,?,?,?,?);";
-        $nullvar = null;
 
+        //null stored in a variable because bindParam uses variables only. For some reason.
+        $null_var = null;
+
+        //Database connection
         $database = new \classes\Database();
         $pdo = $database->getPdo();
 
+        //Prepared statements
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(1, $this->title, \PDO::PARAM_STR);
         $stmt->bindParam(2, $this->body, \PDO::PARAM_STR);
@@ -37,17 +42,20 @@ class Article
         $stmt->bindParam(4, $this->shared, \PDO::PARAM_BOOL);
         $stmt->bindParam(5, $this->creation_date, \PDO::PARAM_STR);
 
+        //Check if object properties are empty or not and then bind accordingly.
         if (!empty($this->notes)) {
             $stmt->bindParam(6, $this->notes, \PDO::PARAM_STR);
         } else {
-            $stmt->bindParam(6, $nullvar, \PDO::PARAM_NULL);
+            $stmt->bindParam(6, $null_var, \PDO::PARAM_NULL);
         }
 
         if (!empty($this->categories)) {
             $stmt->bindParam(7, $this->categories, \PDO::PARAM_STR);
         } else {
-            $stmt->bindParam(7, $nullvar, \PDO::PARAM_NULL);
+            $stmt->bindParam(7, $null_var, \PDO::PARAM_NULL);
         }
+
+
 
         if (!$stmt->execute()) {
             return false;
@@ -56,6 +64,7 @@ class Article
         return true;
     }
 
+    //Set the notes property non-statically for first time the model is stored in the database
     public function setInitNotes($notes): bool {
         if ($this->notes = $notes) {
             return true;
@@ -63,6 +72,7 @@ class Article
         return false;
     }
 
+    //Set the categories property non-statically for first time the model is stored in the database
     public function setInitCategories($categories): bool {
         if ($this->categories = $categories) {
             return true;
@@ -70,12 +80,15 @@ class Article
         return false;
     }
 
+    //Return all articles
     public static function getAll($uid): bool|array {
         $sql = "SELECT * FROM articles WHERE original_author = ?";
 
+        //Database connection
         $database = new \classes\Database();
         $pdo = $database->getPdo();
 
+        //Prepared statements
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
 
@@ -87,16 +100,20 @@ class Article
             return false;
         }
 
+        //All articles
         return $result;
 
     }
 
+    //Return the article based on the article_id provided
     public static function getSpecified($article_id): bool|array {
         $sql = "SELECT * FROM articles WHERE article_id = ?";
 
+        //database connection
         $database = new \classes\Database();
         $pdo = $database->getPdo();
 
+        //prepared statements
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(1, $article_id, \PDO::PARAM_INT);
 
@@ -108,6 +125,7 @@ class Article
             return false;
         }
 
+        //The specified article
         return $result;
     }
 }

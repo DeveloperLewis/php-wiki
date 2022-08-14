@@ -4,6 +4,7 @@ namespace classes;
 
     class Database {
 
+        //Database initialization variables
         private $type = 'mysql';
         private $server = 'localhost';
         private $db = 'wiki';

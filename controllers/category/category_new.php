@@ -11,6 +11,7 @@ if (isset($_SESSION['uid'])) {
             $validation = new \classes\Validation();
             $validation_result = $validation->category($_POST['name']);
 
+            //Check if the variable is an array (Which means it has an array of errors)
             if (is_array($validation_result)) {
                 session_start();
                 $_SESSION['errors'] = $validation_result;
@@ -19,6 +20,7 @@ if (isset($_SESSION['uid'])) {
                 die();
             }
 
+            //Store the category
             $category = new \classes\models\article\Category($_POST['name']);
             $category->store();
 

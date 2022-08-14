@@ -1,6 +1,8 @@
 <?php
+    //Check if the route was a GET method and do the following:
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         session_start();
+        //If user is logged in
         if (isset($_SESSION['uid'])) {
             header('Location: /');
             die();
@@ -9,6 +11,7 @@
         require_once('views/user/register.php');
     }
 
+    //Check if the route was a POST method and do the following:
     elseif($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //Validation initialization.
@@ -53,6 +56,7 @@
             }
         };
 
+        //Check if the email is unique within the USER class
         if (\classes\models\user\User::isEmailUnique($sanitized_email) == false) {
             $email_errors['non_unique'] = "This email address is already in use.";
         };

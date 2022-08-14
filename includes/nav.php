@@ -11,7 +11,7 @@
         <a class="nav-link" href="/">Front Page</a>
       </li>
       <?php
-
+        //Display if you're not logged in
       if(!isset($_SESSION['uid'])) {
         echo '<li class="nav-item">';
         echo '<a class="nav-link" href="/user/register">Register</a>';
@@ -24,6 +24,8 @@
         echo '</li>';
       }
 
+
+      //Display if you are logged in
       if(isset($_SESSION['uid'])) {
         echo '<li class="nav-item">';
         echo '<a class="nav-link" href="/user/logout">Logout</a>';

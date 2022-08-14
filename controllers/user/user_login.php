@@ -22,6 +22,7 @@
             $empty_errors['password'] = "You must enter a password.";
         };
 
+        //Start session if there are any errors
         if (!empty($empty_errors)) {
             session_start();
             $_SESSION['empty_errors'] = $empty_errors;
@@ -40,6 +41,7 @@
 
         $result = classes\models\user\User::authenticate($email, $password);
 
+        //Return more errors if anything goes wrong
         if ($result == "execute failed") {
             session_start();
             $_SESSION['developer_errors'][] = "Something went wrong please try again or contact the site administrator. Error code: 7L9e3UwBC5";
@@ -64,6 +66,7 @@
             die();
         }
 
+        //Otherwise, log them in.
         session_start();
         $_SESSION['uid'] = $result;
 

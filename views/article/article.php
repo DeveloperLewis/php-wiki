@@ -11,6 +11,7 @@
 <?php require_once('includes/nav.php'); ?>
 
     <?php
+    //If the article did not return anything based on the params, display this:
     if (isset($not_found)) {
         echo '<h2 class="text-center">' . $not_found . '</h2>';
     } else {

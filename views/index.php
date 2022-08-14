@@ -11,7 +11,7 @@
         </div>
         <div class="col-4">
         <?php 
-
+            //If the user is logged in, display some things about them
             if(isset($_SESSION['uid'])) {
                 $name = classes\models\user\User::getName($_SESSION['uid']);
                 $date = classes\models\user\User::getCreatedAt($_SESSION['uid']);

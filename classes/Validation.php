@@ -4,6 +4,7 @@ namespace classes;
 
 class Validation
 {
+    //Validation methods for elements of the wiki
     function title(string $title): array|bool {
 
         //Initialize the array.
@@ -129,6 +130,7 @@ class Validation
         return true;
     }
 
+    //Cleans up the html that is dangerous and untrusted with html purifier.
     function purifyHtml(string $string): string {
         $config = \HTMLPurifier_config::createDefault();
         $purifier = new \HTMLPurifier($config);

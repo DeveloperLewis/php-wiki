@@ -16,12 +16,14 @@
                             <tbody>
                             <?php
 
+                                //If the getAll() method failed, then display this
                                 if (!$categories_array = \classes\models\article\Category::getAll()) {
                                     echo '<div class="alert alert-danger" role="alert">';
                                     echo "Fetch for categories failed or none exist, try creating a new category!";
                                     echo '</div>';
                                 }
 
+                                //Show all categories in a table
                                 else {
                                     foreach ($categories_array as $k => $v) {
                                         echo '<tr class="text-center">';
@@ -30,10 +32,12 @@
                                     }
                                 }
 
+                                //Success message for when the new category was added.
                                 if (isset($_SESSION['success'])) {
                                     echo '<div class="alert alert-success" role="alert">';
                                     echo $_SESSION['success'];
                                     echo '</div>';
+
                                     unset($_SESSION['success']);
                                 }
 

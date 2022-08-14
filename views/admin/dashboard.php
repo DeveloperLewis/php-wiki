@@ -24,6 +24,9 @@
 
                 <div class="col-10">
                     <?php
+
+                    //TODO: Need to refactor these panels and simply use normal routing, this is confusing the more panels I add.
+                    //Dynamically display panels based on the url. Not the best way and shouldn't have been done like this.
                     if ($_SERVER['REQUEST_URI'] == "/admin/dashboard") {
                         require_once('includes/admin/dashboard.panel.php');
                     }

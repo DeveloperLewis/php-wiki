@@ -27,15 +27,18 @@ namespace classes\models\user;
         public function store(): bool {
             $sql = "INSERT INTO users (first_name, email, password, is_admin) VALUES (?,?,?,?)";
 
+            //Connect to database.
             $database = new \classes\Database();
             $pdo = $database->getPdo();
 
+            //Prepared statements.
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(1, $this->firstName, \PDO::PARAM_STR);
             $stmt->bindParam(2, $this->email, \PDO::PARAM_STR);
             $stmt->bindParam(3, $this->password, \PDO::PARAM_STR);
             $stmt->bindParam(4, $this->isAdmin, \PDO::PARAM_BOOL);
-            
+
+            //Return false if the statement failed.
             if (!$stmt->execute()) {
                 return false;
             }
@@ -45,21 +48,23 @@ namespace classes\models\user;
 
         //Check if the user exists and return their ID if the password matches the email.
         public static function authenticate($email, $password): string|int {
+            //Connect to database.
             $database = new \classes\Database();
             $pdo = $database->getPdo();
-            
-            $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
 
+            //Prepared Statements.
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->bindParam(1, $email, \PDO::PARAM_STR);
 
             if (!$stmt->execute()) {
                 return "execute failed";
             }
-            
+
             if (!$user = $stmt->fetch()) {
                 return "fetch failed";
             }
 
+            //If given password does not match the one in the database, return string
             if(!password_verify($password, $user['password'])) {
                 return "password failed";
             }
@@ -67,11 +72,13 @@ namespace classes\models\user;
             return $user['uid'];
         }
 
-        //Return a user object
+        //Return a user object.
         public static function getName($uid): bool|array {
+            //Database connection
             $database = new \classes\Database();
             $pdo = $database->getPdo();
-            
+
+            //Prepared statements
             $stmt = $pdo->prepare("SELECT first_name FROM users WHERE uid = ?");
             $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
 
@@ -88,9 +95,12 @@ namespace classes\models\user;
 
         //Return the date of which the user was created at.
         public static function getCreatedAt($uid): bool|array {
+            //Database connection
             $database = new \classes\Database();
             $pdo = $database->getPdo();
-            
+
+
+            //Prepared statements
             $stmt = $pdo->prepare("SELECT created_at FROM users WHERE uid = ?");
             $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
 
@@ -104,11 +114,13 @@ namespace classes\models\user;
             return $createdAt;
         }
 
-        //Return whether or not the email is unique within the datbase.
+        //Return whether the email is unique within the database.
         public static function isEmailUnique($email): bool|int {
+            //Database connection
             $database = new \classes\Database();
             $pdo = $database->getPdo();
 
+            //Prepared statements
             $stmt = $pdo->prepare("SELECT email FROM users WHERE email = ?");
             $stmt->bindParam(1, $email, \PDO::PARAM_STR);
 
@@ -123,10 +135,13 @@ namespace classes\models\user;
             return false;
         }
 
+        //Check whether the user is an admin or not.
         public static function isAdmin($uid): bool|string {
+            //database connection
             $database = new \classes\Database();
             $pdo = $database->getPdo();
 
+            //prepared statements
             $stmt = $pdo->prepare("SELECT is_admin FROM users WHERE uid = ?");
             $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
 
@@ -138,6 +153,7 @@ namespace classes\models\user;
                 return "fetch failed";
             }
 
+            //Check whether the user is an admin or not and return it
             if ($result['is_admin'] == 0) {
                 return false;
             }
