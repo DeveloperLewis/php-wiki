@@ -21,7 +21,7 @@
 
             else {
                 foreach ($articles_array as $k => $v) {
-                    echo '<tr>';
+                    echo '<tr onclick="sendToArticle('. $v['article_id'] . ')" style="cursor: pointer">';
                     echo '<td>' . $v['title'] . '</td>';
                     //TODO: GET AUTHOR NAME BASED ON ID PROVIDED BY ARTICLES ARRAY
                     echo '<td>' . '</td>';
@@ -69,4 +69,9 @@
     </div>
 
     <form id="deleteform" method="POST" action="/article/delete"></form>
+    <script>
+        function sendToArticle(id) {
+            location.href = '/article?id=' + id;
+        }
+    </script>
 </div>

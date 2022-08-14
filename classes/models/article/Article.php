@@ -91,4 +91,23 @@ class Article
 
     }
 
+    public static function getSpecified($article_id): bool|array {
+        $sql = "SELECT * FROM articles WHERE article_id = ?";
+
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $article_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetch()) {
+            return false;
+        }
+
+        return $result;
+    }
 }
