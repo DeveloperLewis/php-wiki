@@ -2,8 +2,8 @@
 
     /* @var $router */
 
-$router->get('/article', function() {
-    echo "hi";
+$router->get('/article', function(array $params) {
+    require('controllers/article/article_view.php');
 });
 
 $router->get('/article/new', function() {

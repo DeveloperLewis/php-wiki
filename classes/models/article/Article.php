@@ -23,8 +23,9 @@ class Article
         $this->creation_date = $creation_date;
     }
 
-    public function storeMinimum(): bool {
-        $sql = "INSERT INTO articles (title, body, original_author, shared, creation_date) VALUES (?,?,?,?,?);";
+    public function store(): bool {
+        $sql = "INSERT INTO articles (title, body, original_author, shared, creation_date, notes, category_ids) VALUES (?,?,?,?,?,?,?);";
+        $nullvar = null;
 
         $database = new \classes\Database();
         $pdo = $database->getPdo();
@@ -36,11 +37,37 @@ class Article
         $stmt->bindParam(4, $this->shared, \PDO::PARAM_BOOL);
         $stmt->bindParam(5, $this->creation_date, \PDO::PARAM_STR);
 
+        if (!empty($this->notes)) {
+            $stmt->bindParam(6, $this->notes, \PDO::PARAM_STR);
+        } else {
+            $stmt->bindParam(6, $nullvar, \PDO::PARAM_NULL);
+        }
+
+        if (!empty($this->categories)) {
+            $stmt->bindParam(7, $this->categories, \PDO::PARAM_STR);
+        } else {
+            $stmt->bindParam(7, $nullvar, \PDO::PARAM_NULL);
+        }
+
         if (!$stmt->execute()) {
             return false;
         }
 
         return true;
+    }
+
+    public function setInitNotes($notes): bool {
+        if ($this->notes = $notes) {
+            return true;
+        }
+        return false;
+    }
+
+    public function setInitCategories($categories): bool {
+        if ($this->categories = $categories) {
+            return true;
+        }
+        return false;
     }
 
     public static function getAll($uid): bool|array {

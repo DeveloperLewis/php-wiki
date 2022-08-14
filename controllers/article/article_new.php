@@ -28,7 +28,6 @@ if(isset($_SESSION['uid'])) {
                 $_SESSION['notes_errors'] = $validation_result_for_notes;
             }
 
-            //TODO: Process the errors on the article_new.panel. So they are visible and show what the user entering incorrectly.
             if (isset($_SESSION['notes_errors']) || isset($_SESSION['title_errors']) || isset($_SESSION['body_errors'])) {
                 $_SESSION['title_previous'] = $_POST['title'];
                 $_SESSION['body_previous'] = $_POST['body'];
@@ -38,7 +37,6 @@ if(isset($_SESSION['uid'])) {
                 die();
             }
 
-            //TODO: Create the class handlers to be able to store the data into the database next.
             $title = $_POST['title'];
             $body = $_POST['body'];
 
@@ -69,7 +67,15 @@ if(isset($_SESSION['uid'])) {
             $article = new \classes\models\article\Article($title, $purified_body,
                 $original_author, $shared, $creation_date);
 
-            if (!$article->storeMinimum()) {
+            if (!empty($_POST['notes'])) {
+                $article->setInitNotes($_POST['notes']);
+            }
+
+            if (!empty($_POST['categories'])) {
+                $article->setInitCategories($_POST['categories']);
+            }
+
+            if (!$article->store()) {
                 session_start();
                 $_SESSION['store_error'] = "There was an error storing the article in the database, please try again.";
                 header('Location: /article/new');
