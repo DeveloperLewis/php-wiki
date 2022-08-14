@@ -56,7 +56,7 @@ class Validation
             $body_errors['max_size'] = "The body must be less than 5000000 characters. You're currently at: " . strlen($body) . ".";
         }
 
-        if (preg_match('/[^a-zA-Z\d#\-=.,:;\/*@!\[\]()`<> ]/', $body)) {
+        if (preg_match('/[^a-zA-Z\d#\-=.,:;\/*@!\[\]()`<>\s]/', $body)) {
             $body_errors['special_chars'] = "The body can only contain letters, numbers and these
             special characters: #-=.,:;/_*@![]()`<>";
         }
@@ -82,7 +82,7 @@ class Validation
             $notes_errors['max_size'] = "The notes must be less than 10000 characters. You're currently at: " . strlen($notes) . ".";
         }
 
-        if (preg_match('/[^A-z\d!?:\-., ]/', $notes)) {
+        if (preg_match('/[^A-z\d!?:\-.,\s]/', $notes)) {
             $notes_errors['special_chars'] = "The notes can only contain
              letters, numbers and the following special characters: !?:-.,";
         }
