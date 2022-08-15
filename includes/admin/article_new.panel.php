@@ -31,6 +31,28 @@
                 </select>
             </div>
 
+            <div class="col-2">
+                <label for="categorySelection" class="form-label">Category: </label>
+                <select class="form-select" id="categorySelection">
+                    <?php
+                        $result = \classes\models\article\Category::getAll();
+
+                        if (!$result) {
+
+                        } else {
+                            foreach ($result as $k => $v) {
+                                echo '<option value="' . $v['category_id'] . '">' . $v['category_name'] . '</option>';
+                            }
+                        }
+
+                    ?>
+                </select>
+            </div>
+
+            <div class="col-2">
+                <label for="category" class="form-label">Selected id:</label>
+                <input class="form-control" type="text" value="" name="category" id="category" readonly>
+            </div>
         </div>
 
         <div class="mb-2">
@@ -87,6 +109,9 @@
 
     <script>
         let cancelButton = document.getElementById('cancel-button');
+        let categorySelection = document.getElementById('categorySelection');
+
+        document.getElementById('category').value = categorySelection.value
 
         cancelButton.addEventListener('click', function() {
             let c = confirm('Are you sure you want to cancel this article?');
@@ -98,5 +123,9 @@
                 console.log('user clicked cancel')
             }
         }, false);
+
+        categorySelection.addEventListener('change', function() {
+            document.getElementById('category').value = categorySelection.value
+        })
     </script>
 </div>

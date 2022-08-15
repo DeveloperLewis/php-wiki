@@ -13,7 +13,7 @@ class Article
     public bool $shared;
     public string $creation_date;
     public int $last_edited_by_author;
-    public array $categories;
+    public int $categories;
 
     public function __construct($title, $body, $original_author, $shared, $creation_date) {
         $this->title = $title;

@@ -76,8 +76,8 @@ if(isset($_SESSION['uid'])) {
                 $article->setInitNotes($_POST['notes']);
             }
 
-            if (!empty($_POST['categories'])) {
-                $article->setInitCategories($_POST['categories']);
+            if (!empty($_POST['category'])) {
+                $article->setInitCategories($_POST['category']);
             }
 
             //If the article failed to store, create an error

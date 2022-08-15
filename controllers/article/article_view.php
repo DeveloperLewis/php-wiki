@@ -8,4 +8,5 @@ if (!$article) {
     $not_found = "The article was not found!";
 }
 
+session_start();
 require_once('views/article/article.php');
