@@ -1,46 +1,57 @@
 <div id="categories-panel">
 
-        <div class="m-4">
+        <div class="">
                 <div class="row">
                     <div class="col-3">
 
                     </div>
                     <div class="col-6">
+
+                        <?php
+                        //Success message for when the new category was added.
+                        if (isset($_SESSION['success'])) {
+                            echo '<div class="alert alert-success" role="alert">';
+                            echo $_SESSION['success'];
+                            echo '</div>';
+
+                            unset($_SESSION['success']);
+                        }
+
+                        //If the getAll() method failed, then display this
+                        if (!$categories_array = \classes\models\article\Category::getAll()) {
+                            echo '<div class="alert alert-danger m-2" role="alert">';
+                            echo "Fetch for categories failed or none exist, try creating a new category!";
+                            echo '</div>';
+                        }
+                        ?>
+
                         <div class="card">
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
-                                <th scope="col" class="text-center">Categories</th>
+                                <th scope="col">Categories</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody style="overflow-y: auto; height:400px; display: block;">
                             <?php
-
-                                //If the getAll() method failed, then display this
-                                if (!$categories_array = \classes\models\article\Category::getAll()) {
-                                    echo '<div class="alert alert-danger" role="alert">';
-                                    echo "Fetch for categories failed or none exist, try creating a new category!";
-                                    echo '</div>';
-                                }
-
                                 //Show all categories in a table
-                                else {
                                     foreach ($categories_array as $k => $v) {
-                                        echo '<tr class="text-center">';
-                                        echo '<td class="text-center">' . $v['category_name'] . '</td>';
+                                        echo '<tr>';
+
+                                        echo '<td style="width: 100%;">' . $v['category_name'] . '</td>';
+
+                                        echo '<form action="/article/delete" method="post">';
+                                        echo '<input type="hidden" value="' . $v['category_id'] .'" name="delete">';
+                                        echo '<td><button class="btn btn-danger" type="submit" style="float:right;">X</button></td>';
+                                        echo '</form>';
+
+                                        echo '<form action="/article/edit" method="post">';
+                                        echo '<input type="hidden" value="' . $v['category_id'] .'" name="messageid">';
+                                        echo '<td><button class="btn btn-success" type="submit" style="float:right;">Edit</button></td>';
+                                        echo '</form>';
+
                                         echo '</tr>';
                                     }
-                                }
-
-                                //Success message for when the new category was added.
-                                if (isset($_SESSION['success'])) {
-                                    echo '<div class="alert alert-success" role="alert">';
-                                    echo $_SESSION['success'];
-                                    echo '</div>';
-
-                                    unset($_SESSION['success']);
-                                }
-
                             ?>
                             </tbody>
                         </table>
@@ -48,32 +59,8 @@
 
                         <div class="mt-4">
                             <div class="row">
-                                <div class="col-8">
-                                    <nav>
-                                        <ul class="pagination">
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Previous">
-                                                    <span aria-hidden="true">&laquo;</span>
-                                                </a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#" aria-label="Next">
-                                                    <span aria-hidden="true">&raquo;</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-
-                                <div class="col-4">
-                                    <div class="float-end">
+                                <div class="col">
                                         <a class="btn btn-primary" href="/category/new">Create New</a>
-                                        <button class="btn btn-danger" form="deleteform">Delete</button>
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
