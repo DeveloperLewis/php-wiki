@@ -52,4 +52,26 @@ class Category
         return $categories;
     }
 
+    public static function getName($category_id): array|bool {
+        $sql = "SELECT category_name FROM categories WHERE category_id = ?";
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //prepared statement
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $category_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$name = $stmt->fetch()) {
+            return false;
+        }
+
+        //Return name
+        return $name;
+    }
 }

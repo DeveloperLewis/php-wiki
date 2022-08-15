@@ -18,11 +18,6 @@ namespace classes\models\user;
             $this->isAdmin = $isAdmin;
         }
 
-        //Return an array containing the user properties
-        public function return(): array {
-            return [$this->firstName, $this->email, $this->password];
-        }
-
         //Store the user in the database.
         public function store(): bool {
             $sql = "INSERT INTO users (first_name, email, password, is_admin) VALUES (?,?,?,?)";

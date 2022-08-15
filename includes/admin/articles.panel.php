@@ -23,10 +23,13 @@
             //Display all articles in the table
             else {
                 foreach ($articles_array as $k => $v) {
+                    $author_name = \classes\models\user\User::getName($v['original_author']);
+
+
+
                     echo '<tr onclick="sendToArticle('. $v['article_id'] . ')" style="cursor: pointer">';
                     echo '<td>' . $v['title'] . '</td>';
-                    //TODO: GET AUTHOR NAME BASED ON ID PROVIDED BY ARTICLES ARRAY
-                    echo '<td>' . '</td>';
+                    echo '<td>' . $author_name['first_name'] . '</td>';
                     echo '<td>No categories found.</td>';
                     //TODO: Fix the original date and use that instead
                     echo '<td>' . $v['last_edited_date']. '</td>';
