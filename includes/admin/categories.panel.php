@@ -2,10 +2,8 @@
 
         <div class="">
                 <div class="row">
-                    <div class="col-3">
 
-                    </div>
-                    <div class="col-6">
+                    <div class="col">
 
                         <?php
                         //Success message for when the new category was added.
@@ -32,7 +30,7 @@
                                 <th scope="col">Categories</th>
                             </tr>
                             </thead>
-                            <tbody style="overflow-y: auto; height:400px; display: block;">
+                            <tbody style="overflow-y: auto; height:550px; display: block;">
                             <?php
                                 //Show all categories in a table
                                     foreach ($categories_array as $k => $v) {
@@ -40,12 +38,12 @@
 
                                         echo '<td style="width: 100%;">' . $v['category_name'] . '</td>';
 
-                                        echo '<form action="/article/delete" method="post">';
+                                        echo '<form action="/category/delete" method="post">';
                                         echo '<input type="hidden" value="' . $v['category_id'] .'" name="delete">';
                                         echo '<td><button class="btn btn-danger" type="submit" style="float:right;">X</button></td>';
                                         echo '</form>';
 
-                                        echo '<form action="/article/edit" method="post">';
+                                        echo '<form action="/category/edit" method="post">';
                                         echo '<input type="hidden" value="' . $v['category_id'] .'" name="messageid">';
                                         echo '<td><button class="btn btn-success" type="submit" style="float:right;">Edit</button></td>';
                                         echo '</form>';
@@ -59,15 +57,13 @@
 
                         <div class="mt-4">
                             <div class="row">
-                                <div class="col">
-                                        <a class="btn btn-primary" href="/category/new">Create New</a>
+                                <div class="col-12">
+                                        <a class="btn btn-primary float-end" href="/category/new">Create New</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-3">
 
-                    </div>
                 </div>
         </div>
 

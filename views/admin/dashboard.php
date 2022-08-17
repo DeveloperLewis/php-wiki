@@ -9,7 +9,10 @@
 <div class="container">
     <div class="card m-4">
         <div class="text-center">
-            <h3>Welcome back, USERNAME</h3>
+            <h3> <?php
+                $name_arr = classes\models\user\User::getName($_SESSION['uid']);
+                echo ucfirst($name_arr['first_name']);
+                ?>'s Dashboard</h3>
         </div>
 
         <div class="card-body">

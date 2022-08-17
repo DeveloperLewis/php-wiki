@@ -3,13 +3,13 @@
         <table class="table table-striped table-hover">
             <thead>
             <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Author</th>
-                <th scope="col">Categories</th>
-                <th scope="col">Date</th>
+                <th scope="col" style="display: inline-block; width: 52%;">Title</th>
+                <th scope="col" style="display: inline-block; width: 10%">Author</th>
+                <th scope="col" style="display: inline-block; width: 10%">Categories</th>
+                <th scope="col" style="display: inline-block; width: 20%">Date</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody style="overflow-y: auto; height:550px; display: block;">
 
             <?php
 
@@ -33,6 +33,15 @@
                     echo '<td>No categories found.</td>';
                     //TODO: Fix the original date and use that instead
                     echo '<td>' . $v['last_edited_date']. '</td>';
+                    echo '<form action="/category/delete" method="post">';
+                    echo '<input type="hidden" value="' . '' .'" name="delete">';
+                    echo '<td><button class="btn btn-danger" type="submit" style="float:right;">X</button></td>';
+                    echo '</form>';
+
+                    echo '<form action="/category/edit" method="post">';
+                    echo '<input type="hidden" value="' . '' .'" name="messageid">';
+                    echo '<td><button class="btn btn-success" type="submit" style="float:right;">Edit</button></td>';
+                    echo '</form>';
                     echo '</tr>';
                 }
             }
@@ -42,32 +51,10 @@
     </div>
     <div class="mt-4">
         <div class="row">
-            <div class="col-8">
-                <nav>
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
 
-            <div class="col-4">
+            <div class="col">
                 <div class="float-end">
                     <a class="btn btn-primary" href="/article/new">Create New</a>
-                    <a class="btn btn-danger" href="/article/edit">Edit</a>
-                    <button class="btn btn-danger" form="deleteform">Delete</button>
-
                 </div>
             </div>
         </div>
