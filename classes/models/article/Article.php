@@ -146,4 +146,27 @@ class Article
 
         return true;
     }
+
+    public static function getTotalCount($uid): bool|array {
+        $sql = "SELECT COUNT(original_author) FROM articles WHERE original_author = ?";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetch()) {
+            return false;
+        }
+
+        //The total amount of articles based on the user
+        return $result;
+
+    }
 }

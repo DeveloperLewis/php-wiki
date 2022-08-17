@@ -92,4 +92,26 @@ class Category
 
         return true;
     }
+
+    public static function getTotalCount(): bool|array {
+        $sql = "SELECT COUNT(category_id) FROM categories";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetch()) {
+            return false;
+        }
+
+        //The total amount of categories
+        return $result;
+
+    }
 }
