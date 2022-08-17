@@ -74,4 +74,22 @@ class Category
         //Return name
         return $name;
     }
+
+    public static function delete($category_id): bool {
+        $sql = "DELETE FROM categories WHERE category_id = ?";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $category_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        return true;
+    }
 }

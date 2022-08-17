@@ -128,4 +128,22 @@ class Article
         //The specified article
         return $result;
     }
+
+    public static function delete($article_id): bool {
+        $sql = "DELETE FROM articles WHERE article_id = ?";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $article_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        return true;
+    }
 }

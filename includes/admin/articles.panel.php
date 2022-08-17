@@ -1,4 +1,16 @@
 <div id="articles-panel">
+
+    <?php
+        if (isset($_SESSION['delete_error'])) {
+            echo '<div class="alert alert-danger" role="alert">';
+            echo $_SESSION['delete_error'];
+            echo '</div>';
+
+            unset($_SESSION['delete_error']);
+        }
+    ?>
+
+
     <div class="card">
         <table class="table table-striped table-hover">
             <thead>
@@ -33,13 +45,13 @@
                     echo '<td>No categories found.</td>';
                     //TODO: Fix the original date and use that instead
                     echo '<td>' . $v['last_edited_date']. '</td>';
-                    echo '<form action="/category/delete" method="post">';
-                    echo '<input type="hidden" value="' . '' .'" name="delete">';
+                    echo '<form action="/article/delete" method="post">';
+                    echo '<input type="hidden" value="' . $v['article_id'] .'" name="id">';
                     echo '<td><button class="btn btn-danger" type="submit" style="float:right;">X</button></td>';
                     echo '</form>';
 
-                    echo '<form action="/category/edit" method="post">';
-                    echo '<input type="hidden" value="' . '' .'" name="messageid">';
+                    echo '<form action="/article/edit" method="post">';
+                    echo '<input type="hidden" value="' . $v['article_id'] .'" name="articleid">';
                     echo '<td><button class="btn btn-success" type="submit" style="float:right;">Edit</button></td>';
                     echo '</form>';
                     echo '</tr>';
@@ -59,8 +71,6 @@
             </div>
         </div>
     </div>
-
-    <form id="deleteform" method="POST" action="/article/delete"></form>
     <script>
         function sendToArticle(id) {
             location.href = '/article?id=' + id;
