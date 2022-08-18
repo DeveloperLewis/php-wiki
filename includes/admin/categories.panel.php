@@ -53,7 +53,7 @@
                                         echo '<td><button class="btn btn-danger" type="submit" style="float:right;">X</button></td>';
                                         echo '</form>';
 
-                                        echo '<form action="/category/edit" method="post">';
+                                        echo '<form action="/category/edit" method="get">';
                                         echo '<input type="hidden" value="' . $v['category_id'] .'" name="id">';
                                         echo '<td><button class="btn btn-success" type="submit" style="float:right;">Edit</button></td>';
                                         echo '</form>';

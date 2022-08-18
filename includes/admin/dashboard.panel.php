@@ -1,7 +1,7 @@
 <div id="dashboard-panel">
     <div class="row">
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
+        <div class="col-6">
+            <div class="card text-center">
                 <div class="card-body">
                     <?php
                         if ($count_arr_articles = \classes\models\article\Article::getTotalCount($_SESSION['uid'])) {
@@ -14,8 +14,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
+        <div class="col-6">
+            <div class="card text-center">
                 <div class="card-body">
                     <?php
                         if ($count_arr_categories = \classes\models\article\Category::getTotalCount()) {
@@ -25,13 +25,6 @@
                         }
                     ?>
                     <h5 class="card-title">Total Categories: <?= $categories_count ?></h5>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Some other stats: 10</h5>
                 </div>
             </div>
         </div>

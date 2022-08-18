@@ -50,8 +50,8 @@
                     echo '<td><button class="btn btn-danger" type="submit" style="float:right;">X</button></td>';
                     echo '</form>';
 
-                    echo '<form action="/article/edit" method="post">';
-                    echo '<input type="hidden" value="' . $v['article_id'] .'" name="articleid">';
+                    echo '<form action="/article/edit" method="get">';
+                    echo '<input type="hidden" value="' . $v['article_id'] .'" name="id">';
                     echo '<td><button class="btn btn-success" type="submit" style="float:right;">Edit</button></td>';
                     echo '</form>';
                     echo '</tr>';

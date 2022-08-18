@@ -55,6 +55,10 @@
                         require_once('includes/admin/category_new.panel.php');
                     }
 
+                    if ($_SERVER['REQUEST_URI'] == "/category/edit") {
+                        require_once('includes/admin/category_edit.panel.php');
+                    }
+
 
                     ?>
 

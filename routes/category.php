@@ -11,6 +11,16 @@ $router->post('/category/new', function () {
 
 
 
+$router->get('/category/edit', function () {
+    require_once('controllers/category/category_edit.php');
+});
+
+$router->post('/category/edit', function () {
+    require_once('controllers/category/category_edit.php');
+});
+
+
+
 $router->post('/category/delete', function () {
     require_once('controllers/category/category_delete.php');
 });
