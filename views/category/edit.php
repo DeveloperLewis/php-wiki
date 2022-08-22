@@ -1,3 +1,7 @@
+<?php
+/* @var $category */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,10 +31,48 @@
 
                 <div class="col-10">
 
+                    <div class="card">
+                        <div class="row m-4">
+                            <div class="col-4">
 
-                    <div id="newarticle-panel">
-                        <p>Here is the category editor panel</p>
+                            </div>
+                            <div class="col-4">
+
+                                <?php
+
+                                //Display all errors that show when trying to submit the post request for a new category
+                                if (isset($_SESSION['errors'])) {
+                                    foreach ($_SESSION['errors'] as $k => $v) {
+                                        echo '<div class="alert alert-danger" role="alert">';
+                                        echo $v;
+                                        echo '</div>';
+                                    }
+                                    unset($_SESSION['errors']);
+                                }
+                                ?>
+
+                                <form action="/category/edit" method="post">
+                                    <label>Category Name: </label>
+                                    <input type="text" class="form-control" name="name" value="<?php
+                                    if(isset($_SESSION['previous'])) { echo $_SESSION['previous']; unset($_SESSION['previous']); }
+                                    else {
+                                        if (isset($category['category_name'])) {
+                                            echo $category['category_name'];
+                                        }
+                                    }
+                                    ?>">
+
+                                    <input type="hidden" name="id" value="<?php if (isset($category['category_id'])) { echo $category['category_id']; }?>">
+
+                                    <button class="btn btn-primary mt-2" type="submit">Edit Category</button>
+                                </form>
+                            </div>
+                            <div class="col-4">
+
+                            </div>
+                        </div>
                     </div>
+
 
                 </div>
             </div>

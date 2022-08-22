@@ -114,4 +114,27 @@ class Category
         return $result;
 
     }
+
+    public static function getById($category_id): bool|array {
+        $sql = "SELECT * FROM categories WHERE category_id = ?";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $category_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetch()) {
+            return false;
+        }
+
+        //The specified category
+        return $result;
+    }
 }
