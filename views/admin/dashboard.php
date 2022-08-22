@@ -26,44 +26,38 @@
                 </div>
 
                 <div class="col-10">
-                    <?php
-
-                    //TODO: Need to refactor these panels and simply use normal routing, this is confusing the more panels I add.
-                    //Dynamically display panels based on the url. Not the best way and shouldn't have been done like this.
-                    if ($_SERVER['REQUEST_URI'] == "/admin/dashboard") {
-                        require_once('includes/admin/dashboard.panel.php');
-                    }
-
-                    if ($_SERVER['REQUEST_URI'] == "/admin/articles") {
-
-                        require_once('includes/admin/articles.panel.php');
-                    }
-
-                    if ($_SERVER['REQUEST_URI'] == "/article/new") {
-                        require_once('includes/admin/article_new.panel.php');
-                    }
-
-                    if ($_SERVER['REQUEST_URI'] == "/article/edit") {
-                        require_once('includes/admin/article_edit.panel.php');
-                    }
-
-                    if ($_SERVER['REQUEST_URI'] == "/admin/categories") {
-                        require_once('includes/admin/categories.panel.php');
-                    }
-
-                    if ($_SERVER['REQUEST_URI'] == "/category/new") {
-                        require_once('includes/admin/category_new.panel.php');
-                    }
-
-                    if ($_SERVER['REQUEST_URI'] == "/category/edit") {
-                        require_once('includes/admin/category_edit.panel.php');
-                    }
-
-
-                    ?>
-
-
-
+                    <div id="dashboard-panel">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <?php
+                                        if ($count_arr_articles = \classes\models\article\Article::getTotalCount($_SESSION['uid'])) {
+                                            $articles_count = $count_arr_articles['COUNT(original_author)'];
+                                        } else {
+                                            $articles_count = 0;
+                                        }
+                                        ?>
+                                        <h5 class="card-title">Total Articles By You: <?= $articles_count ?></h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <?php
+                                        if ($count_arr_categories = \classes\models\article\Category::getTotalCount()) {
+                                            $categories_count = $count_arr_categories['COUNT(category_id)'];
+                                        } else {
+                                            $categories_count = 0;
+                                        }
+                                        ?>
+                                        <h5 class="card-title">Total Categories: <?= $categories_count ?></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

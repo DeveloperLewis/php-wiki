@@ -9,11 +9,11 @@ $router->get('/admin/dashboard', function() {
 
 
 $router->get('/admin/articles', function() {
-    require_once('controllers/admin/admin_dashboard.php');
+    require_once('controllers/admin/admin_articles.php');
 });
 
 
 
 $router->get('/admin/categories', function() {
-    require_once('controllers/admin/admin_dashboard.php');
+    require_once('controllers/admin/admin_categories.php');
 });
