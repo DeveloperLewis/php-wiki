@@ -162,6 +162,8 @@
                                 <button class="btn btn-primary" type="submit">Edit article</button>
                                 <button class="btn btn-danger" type="button" id="cancel-button">Cancel</button>
                             </div>
+
+                            <input type="hidden" name="article_id" value="<?php if (isset($article['article_id'])) { echo $article['article_id']; }?>">
                         </form>
 
                         <script>

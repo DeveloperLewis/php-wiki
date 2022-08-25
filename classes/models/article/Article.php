@@ -64,6 +64,46 @@ class Article
         return true;
     }
 
+    public static function update($title, $body, $original_author, $shared, $creation_date, $notes, $category_ids, $article_id): bool {
+        $sql = "UPDATE articles SET title = ?, body = ?, original_author = ?, shared = ?, creation_date = ?, notes = ?, category_ids = ? WHERE article_id = ?";
+
+        //null stored in a variable because bindParam uses variables only. For some reason.
+        $null_var = null;
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $title, \PDO::PARAM_STR);
+        $stmt->bindParam(2, $body, \PDO::PARAM_STR);
+        $stmt->bindParam(3, $original_author, \PDO::PARAM_INT);
+        $stmt->bindParam(4, $shared, \PDO::PARAM_BOOL);
+        $stmt->bindParam(5, $creation_date, \PDO::PARAM_STR);
+
+        //Check if object properties are empty or not and then bind accordingly.
+        if (!empty($notes)) {
+            $stmt->bindParam(6, $notes, \PDO::PARAM_STR);
+        } else {
+            $stmt->bindParam(6, $null_var, \PDO::PARAM_NULL);
+        }
+
+        if (!empty($categories)) {
+            $stmt->bindParam(7, $categories, \PDO::PARAM_STR);
+        } else {
+            $stmt->bindParam(7, $null_var, \PDO::PARAM_NULL);
+        }
+
+        $stmt->bindParam(8, $article_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        return true;
+    }
+
     //Set the notes property non-statically for first time the model is stored in the database
     public function setInitNotes($notes): bool {
         if ($this->notes = $notes) {
