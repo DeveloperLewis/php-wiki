@@ -16,7 +16,33 @@ if (isset($_SESSION['uid'])) {
 
             require_once('views/category/edit.php');
         } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo "hi";
+            //Check if the category name meets the validation requirements, if not
+            //then get the returned array and send it through for errors.
+            $validation = new \classes\Validation();
+            $validation_result = $validation->category($_POST['name']);
+
+            //Check if the variable is an array (Which means it has an array of errors)
+            if (is_array($validation_result)) {
+                session_start();
+                $_SESSION['errors'] = $validation_result;
+                $_SESSION['previous'] = $_POST['name'];
+                header('Location: /category/edit?id=' . $_POST['id']);
+                die();
+            }
+
+            //Update the category
+            if (!\classes\models\article\Category::update($_POST['name'], $_POST['id'])) {
+                session_start();
+                $_SESSION['error'] = "Failed to update category, id: " . $_POST['id'];
+                $_SESSION['previous'] = $_POST['name'];
+                header('Location: /category/edit');
+                die();
+            };
+
+            session_start();
+            $_SESSION['success'] = "Successfully edited the category from " .  $_POST['previous'] . " to " . $_POST['name'] ;
+            header('Location: /admin/categories');
+            die();
         }
     }
 }

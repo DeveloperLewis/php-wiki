@@ -63,6 +63,7 @@
                                     ?>">
 
                                     <input type="hidden" name="id" value="<?php if (isset($category['category_id'])) { echo $category['category_id']; }?>">
+                                    <input type="hidden" name="previous" value="<?php if (isset($category['category_name'])) { echo $category['category_name']; }?>">
 
                                     <button class="btn btn-primary mt-2" type="submit">Edit Category</button>
                                 </form>

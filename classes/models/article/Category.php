@@ -29,6 +29,24 @@ class Category
         return true;
     }
 
+    public static function update($category_name, $category_id): bool {
+        $sql = "UPDATE categories SET category_name = ? WHERE category_id = ?";
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $category_name, \PDO::PARAM_STR);
+        $stmt->bindParam(2, $category_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        return true;
+    }
+
     //Return all category objects as an array
     public static function getAll(): array|bool {
         $sql = "SELECT * FROM categories;";
