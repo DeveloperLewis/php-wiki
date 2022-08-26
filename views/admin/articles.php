@@ -37,7 +37,17 @@
 
                             unset($_SESSION['delete_error']);
                         }
+
+                        //display that article success messages
+                        if (isset($_SESSION['success'])) {
+                            echo '<div class="alert alert-success" role="alert">';
+                            echo $_SESSION['success'];
+                            echo '</div>';
+
+                            unset($_SESSION['success']);
+                        }
                         ?>
+
 
 
                         <div class="card">
