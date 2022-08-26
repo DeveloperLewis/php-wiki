@@ -54,8 +54,12 @@ if(isset($_SESSION['uid'])) {
             $original_author = $_SESSION['uid'];
             $shared = $_POST['shared'];
 
-            $date = new DateTime();
-            $creation_date = $date->getTimestamp();
+            //Update the last edited date for the article
+            $timezone = 'Europe/London';
+            $timestamp = time();
+            $dt = new DateTime("now", new DateTimeZone($timezone));
+            $dt->setTimestamp($timestamp);
+            $last_edited_date = $dt->format('d.m.Y H:i:s');
 
             $last_edited_by_author = $original_author;
 
@@ -78,7 +82,7 @@ if(isset($_SESSION['uid'])) {
             $purified_body = $validation->purifyHtml($body);
 
             //If the article failed to store, create an error
-            if (!\classes\models\article\Article::update($title, $purified_body, $original_author, $shared, $creation_date, $notes, $categories, $_POST['article_id'])) {
+            if (!\classes\models\article\Article::update($title, $purified_body, $original_author, $shared, $notes, $categories, $_POST['article_id'], $last_edited_date)) {
                 session_start();
                 $_SESSION['store_error'] = "There was an error storing the article in the database, please try again.";
                 header('Location: /article/edit?id=' . $_POST['article_id']);

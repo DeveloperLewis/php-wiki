@@ -12,20 +12,22 @@ class Article
     public int $original_author;
     public bool $shared;
     public string $creation_date;
+    public string $last_edited_date;
     public int $last_edited_by_author;
     public int $categories;
 
-    public function __construct($title, $body, $original_author, $shared, $creation_date) {
+    public function __construct($title, $body, $original_author, $shared, $creation_date, $last_edited_date) {
         $this->title = $title;
         $this->body = $body;
         $this->original_author = $original_author;
         $this->shared = $shared;
         $this->creation_date = $creation_date;
+        $this->last_edited_date = $last_edited_date;
     }
 
     //Store the article in the database
     public function store(): bool {
-        $sql = "INSERT INTO articles (title, body, original_author, shared, creation_date, notes, category_ids) VALUES (?,?,?,?,?,?,?);";
+        $sql = "INSERT INTO articles (title, body, original_author, shared, creation_date, notes, category_ids, last_edited_date) VALUES (?,?,?,?,?,?,?,?);";
 
         //null stored in a variable because bindParam uses variables only. For some reason.
         $null_var = null;
@@ -55,7 +57,7 @@ class Article
             $stmt->bindParam(7, $null_var, \PDO::PARAM_NULL);
         }
 
-
+        $stmt->bindParam(8, $this->last_edited_date, \PDO::PARAM_STR);
 
         if (!$stmt->execute()) {
             return false;
@@ -64,8 +66,8 @@ class Article
         return true;
     }
 
-    public static function update($title, $body, $original_author, $shared, $creation_date, $notes, $category_ids, $article_id): bool {
-        $sql = "UPDATE articles SET title = ?, body = ?, original_author = ?, shared = ?, creation_date = ?, notes = ?, category_ids = ? WHERE article_id = ?";
+    public static function update($title, $body, $original_author, $shared, $notes, $categories, $article_id, $last_edited_date): bool {
+        $sql = "UPDATE articles SET title = ?, body = ?, original_author = ?, shared = ?, last_edited_date = ?, notes = ?, category_ids = ? WHERE article_id = ?";
 
         //null stored in a variable because bindParam uses variables only. For some reason.
         $null_var = null;
@@ -80,7 +82,7 @@ class Article
         $stmt->bindParam(2, $body, \PDO::PARAM_STR);
         $stmt->bindParam(3, $original_author, \PDO::PARAM_INT);
         $stmt->bindParam(4, $shared, \PDO::PARAM_BOOL);
-        $stmt->bindParam(5, $creation_date, \PDO::PARAM_STR);
+        $stmt->bindParam(5, $last_edited_date, \PDO::PARAM_STR);
 
         //Check if object properties are empty or not and then bind accordingly.
         if (!empty($notes)) {

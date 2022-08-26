@@ -82,8 +82,7 @@
                                         echo '<td>' . $v['title'] . '</td>';
                                         echo '<td>' . $author_name['first_name'] . '</td>';
                                         echo '<td>No categories found.</td>';
-                                        //TODO: Fix the original date and use that instead
-                                        echo '<td>' . $v['last_edited_date']. '</td>';
+                                        echo '<td>' . $v['creation_date']. '</td>';
                                         echo '<form action="/article/delete" method="post">';
                                         echo '<input type="hidden" value="' . $v['article_id'] .'" name="id">';
                                         echo '<td><button class="btn btn-danger" type="submit" style="float:right;">X</button></td>';

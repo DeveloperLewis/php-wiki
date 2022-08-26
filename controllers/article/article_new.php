@@ -53,8 +53,15 @@ if(isset($_SESSION['uid'])) {
             $original_author = $_SESSION['uid'];
             $shared = $_POST['shared'];
 
-            $date = new DateTime();
-            $creation_date = $date->getTimestamp();
+            //Set the creation and last edited date upon creation
+            $timezone = 'Europe/London';
+            $timestamp = time();
+            $dt = new DateTime("now", new DateTimeZone($timezone)); //first argument "must" be a string
+            $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
+            $creation_date = $dt->format('d.m.Y H:i:s');
+            $last_edited_date = $dt->format('d.m.Y H:i:s');
+
+
 
             $last_edited_by_author = $original_author;
 
@@ -69,7 +76,7 @@ if(isset($_SESSION['uid'])) {
 
             //Required parameters to create a bare minimum article.
             $article = new \classes\models\article\Article($title, $purified_body,
-                $original_author, $shared, $creation_date);
+                $original_author, $shared, $creation_date, $last_edited_date);
 
             //If these post items aren't empty, assign them to the object properties
             if (!empty($_POST['notes'])) {
