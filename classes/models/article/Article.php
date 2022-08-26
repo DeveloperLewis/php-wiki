@@ -209,4 +209,26 @@ class Article
         return $result;
 
     }
+
+    public static function getRecent(int $amount): bool|array {
+        $sql = "SELECT * FROM articles ORDER BY article_id DESC LIMIT " . $amount;
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetchAll()) {
+            return false;
+        }
+
+        //the most recent articles
+        return $result;
+    }
 }

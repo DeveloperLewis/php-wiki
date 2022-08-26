@@ -13,7 +13,7 @@ $router = new classes\Router();
 //Standard & Basic routing
 $router->get('/', function() {
     session_start();
-    require_once('views/index.php');
+    require_once('controllers/index.php');
 });
 
 //404 handler
