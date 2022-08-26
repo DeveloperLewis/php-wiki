@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2022 at 10:02 PM
+-- Generation Time: Aug 26, 2022 at 03:40 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -28,8 +28,8 @@ CREATE TABLE `articles` (
   `notes` varchar(10000) DEFAULT NULL,
   `original_author` int(11) DEFAULT NULL,
   `shared` bit(1) DEFAULT NULL,
-  `creation_date` datetime NOT NULL,
-  `last_edited_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `creation_date` tinytext NOT NULL,
+  `last_edited_date` tinytext NOT NULL,
   `last_edited_by_author` int(11) NOT NULL,
   `category_ids` mediumtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
