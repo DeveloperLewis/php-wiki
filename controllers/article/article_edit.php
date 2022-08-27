@@ -71,8 +71,8 @@ if(isset($_SESSION['uid'])) {
 
 
 
-            if (!empty($_POST['categories'])) {
-                $categories = $_POST['categories'];
+            if (!empty($_POST['category'])) {
+                $categories = $_POST['category'];
             } else {
                 $categories = null;
             }

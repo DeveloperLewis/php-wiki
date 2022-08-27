@@ -54,13 +54,15 @@
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col" style="display: inline-block; width: 52%;">Title</th>
-                                    <th scope="col" style="display: inline-block; width: 10%">Author</th>
-                                    <th scope="col" style="display: inline-block; width: 10%">Categories</th>
-                                    <th scope="col" style="display: inline-block; width: 20%">Date</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Author</th>
+                                    <th scope="col">Categories</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
                                 </thead>
-                                <tbody style="overflow-y: auto; height:550px; display: block;">
+                                <tbody>
 
                                 <?php
 
@@ -75,22 +77,28 @@
                                 else {
                                     foreach ($articles_array as $k => $v) {
                                         $author_name = \classes\models\user\User::getName($v['original_author']);
-
+                                        $category_name = \classes\models\article\Category::getName($v['category_ids']);
 
 
                                         echo '<tr onclick="sendToArticle('. $v['article_id'] . ')" style="cursor: pointer">';
                                         echo '<td>' . $v['title'] . '</td>';
                                         echo '<td>' . $author_name['first_name'] . '</td>';
-                                        echo '<td>No categories found.</td>';
+                                        if (is_array($category_name)) {
+                                            echo '<td>' . $category_name['category_name'] . '</td>';
+                                        } else {
+                                            echo '<td>No categories Found</td>';
+                                        }
                                         echo '<td>' . $v['creation_date']. '</td>';
-                                        echo '<form action="/article/delete" method="post">';
-                                        echo '<input type="hidden" value="' . $v['article_id'] .'" name="id">';
-                                        echo '<td><button class="btn btn-danger" type="submit" style="float:right;">X</button></td>';
-                                        echo '</form>';
 
+                                        //Edit button with form
                                         echo '<form action="/article/edit" method="get">';
                                         echo '<input type="hidden" value="' . $v['article_id'] .'" name="id">';
                                         echo '<td><button class="btn btn-success" type="submit" style="float:right;">Edit</button></td>';
+                                        echo '</form>';
+                                        //Delete button with form
+                                        echo '<form action="/article/delete" method="post">';
+                                        echo '<input type="hidden" value="' . $v['article_id'] .'" name="id">';
+                                        echo '<td><button class="btn btn-danger" type="submit">X</button></td>';
                                         echo '</form>';
                                         echo '</tr>';
                                     }
