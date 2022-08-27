@@ -38,6 +38,7 @@
                     <img class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title"><?= $v['title']?></h5>
+                        <hr>
                         <p class="card-text"><?php
                             if (strlen($v['body']) > 200) {
                                 $v['body'] = substr($v['body'], 0, 200) . '...';
