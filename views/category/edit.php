@@ -11,27 +11,8 @@
 <?php require_once('includes/nav.php'); ?>
 
 <div class="container">
-    <div class="card m-4">
-        <div class="text-center">
-            <h3> <?php
-                $name_arr = classes\models\user\User::getName($_SESSION['uid']);
-                echo ucfirst($name_arr['first_name']);
-                ?>'s Dashboard</h3>
-        </div>
-
-        <div class="card-body">
             <div class="row">
-                <div class="col-2 fixed">
-                    <div class="card">
-                        <a class="m-1 btn btn-primary" href="/admin/dashboard" id="dashboard-button">Dashboard</a>
-                        <a class="m-1 btn btn-primary" href="/admin/articles" id="articles-button">Articles</a>
-                        <a class="m-1 btn btn-primary" href="/admin/categories" id="categories-button">Categories</a>
-                    </div>
-                </div>
-
-                <div class="col-10">
-
-                    <div class="card">
+                <div class="col-12">
                         <div class="row m-4">
                             <div class="col-4">
 
@@ -65,7 +46,8 @@
                                     <input type="hidden" name="id" value="<?php if (isset($category['category_id'])) { echo $category['category_id']; }?>">
                                     <input type="hidden" name="previous" value="<?php if (isset($category['category_name'])) { echo $category['category_name']; }?>">
 
-                                    <button class="btn btn-primary mt-2" type="submit">Edit Category</button>
+                                    <button class="btn btn-primary mt-2 float-end" type="submit">Edit Category</button>
+                                    <a class="btn btn-danger mt-2 float-start" href="/admin/categories">Cancel</a>
                                 </form>
                             </div>
                             <div class="col-4">

@@ -11,25 +11,9 @@
 <?php require_once('includes/nav.php'); ?>
 
 <div class="container">
-    <div class="card m-4">
-        <div class="text-center">
-            <h3> <?php
-                $name_arr = classes\models\user\User::getName($_SESSION['uid']);
-                echo ucfirst($name_arr['first_name']);
-                ?>'s Dashboard</h3>
-        </div>
-
-        <div class="card-body">
+    <div class="m-4">
             <div class="row">
-                <div class="col-2 fixed">
-                    <div class="card">
-                        <a class="m-1 btn btn-primary" href="/admin/dashboard" id="dashboard-button">Dashboard</a>
-                        <a class="m-1 btn btn-primary" href="/admin/articles" id="articles-button">Articles</a>
-                        <a class="m-1 btn btn-primary" href="/admin/categories" id="categories-button">Categories</a>
-                    </div>
-                </div>
-
-                <div class="col-10">
+                <div class="col-12">
 
                     <div id="editarticle-panel">
                         <form action="/article/edit" method="POST">
@@ -59,7 +43,7 @@
                             </div>
 
                             <div class="row mb-2">
-                                <div class="col-2">
+                                <div class="col-md-2">
                                     <label for="shared" class="form-label">Shared: </label>
                                     <select class="form-select" id="shared" name="shared">
                                         <?php
@@ -76,7 +60,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-2">
+                                <div class="col-md-2">
                                     <label for="categorySelection" class="form-label">Category: </label>
                                     <select class="form-select" id="categorySelection">
                                         <?php
@@ -98,7 +82,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-2">
+                                <div class="col-md-2">
                                     <label for="category" class="form-label">Selected: </label>
                                     <input class="form-control" type="text" value="" name="category" id="category" readonly>
                                 </div>
@@ -159,8 +143,8 @@
                             </div>
 
                             <div>
-                                <button class="btn btn-primary" type="submit">Edit article</button>
-                                <button class="btn btn-danger" type="button" id="cancel-button">Cancel</button>
+                                <button class="btn btn-danger float-start" type="button" id="cancel-button">Cancel</button>
+                                <button class="btn btn-primary float-end" type="submit">Edit Article</button>
                             </div>
 
                             <input type="hidden" name="article_id" value="<?php if (isset($article['article_id'])) { echo $article['article_id']; }?>">
@@ -177,7 +161,7 @@
 
                                 if (c) {
                                     console.log('User clicked ok')
-                                    window.location.href = "/admin/dashboard"
+                                    window.location.href = "/admin/articles"
                                 } else {
                                     console.log('user clicked cancel')
                                 }
