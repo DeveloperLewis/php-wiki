@@ -1,6 +1,8 @@
-# A wikipedia built in pure php using my framework
-Wikipedia with multiple accounts, admin accounts and displaying the articles by category and more
-All built with php and only php!
+# A wikipedia built using my custom framework
+A fairly simple wikipedia that has admin accounts that can share between articles,
+a wysiwyg for ease of use, a backend system for managing your articles and more.
+
+Almost completely coded from scratch using php. (Uses autoloading from composer because its magic and HTMLpurifier for security and sanitization.)
 
 
 

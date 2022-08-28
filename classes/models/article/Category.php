@@ -155,4 +155,50 @@ class Category
         //The specified category
         return $result;
     }
+
+    public static function isCategoryUnique($category_name): bool|int {
+        $sql = "SELECT category_name FROM categories WHERE category_name = ?";
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $category_name, \PDO::PARAM_STR);
+
+        if (!$stmt->execute()) {
+            return 0;
+        }
+
+        if (empty($stmt->fetch())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isCategoryInUse($category_id): bool|array {
+        $sql = "SELECT COUNT(category_ids) FROM articles where category_ids = ?";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $category_id, \PDO::PARAM_STR);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetch()) {
+            return false;
+        }
+
+        if ($result['COUNT(category_ids)'] > 0) {
+            return true;
+        }
+
+        return false;
+    }
 }

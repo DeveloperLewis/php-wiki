@@ -36,6 +36,15 @@
                                         unset($_SESSION['delete_error']);
                                     }
 
+                                    //Error message for deleting a category that is in ue
+                                    if (isset($_SESSION['in_use'])) {
+                                        echo '<div class="alert alert-danger" role="alert">';
+                                        echo $_SESSION['in_use'];
+                                        echo '</div>';
+
+                                        unset($_SESSION['in_use']);
+                                    }
+
                                     //Success message for when the new category was added.
                                     if (isset($_SESSION['success'])) {
                                         echo '<div class="alert alert-success" role="alert">';

@@ -105,7 +105,7 @@ class Validation
 
         //Validation Rules.
         if (empty($category)) {
-            $category_errors = "The category cannot be empty!";
+            $category_errors['empty'] = "The category cannot be empty!";
         }
 
         if (strlen($category) < 4) {
@@ -113,12 +113,16 @@ class Validation
         }
 
         if (strlen($category) > 25) {
-            $category_errors['min_size'] = "The category must be less than 25 characters. You're currently at: " . strlen($category) . ".";
+            $category_errors['max_size'] = "The category must be less than 25 characters. You're currently at: " . strlen($category) . ".";
         }
 
         if (preg_match('/[^a-zA-Z\- ]/', $category)) {
             $category_errors['special_chars'] = "The category can only contain
              letters and the character: -";
+        }
+
+        if (!\classes\models\article\Category::isCategoryUnique($category)) {
+            $category_errors['not_unique'] = "This category already exists, please try another name.";
         }
 
         //Return the array if there are any errors.
