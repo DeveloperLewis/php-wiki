@@ -116,33 +116,67 @@
                             <div>
                                 <button class="btn btn-danger float-start" type="button" id="cancel-button">Cancel</button>
                                 <button class="btn btn-primary float-end" type="submit">Create Article</button>
+                                <button class="btn btn-primary float-end mx-2" type="button" id="preview-button">Preview</button>
                             </div>
                         </form>
-
-                        <script>
-                            let cancelButton = document.getElementById('cancel-button');
-                            let categorySelection = document.getElementById('categorySelection');
-
-                            document.getElementById('category').value = categorySelection.value
-
-                            cancelButton.addEventListener('click', function() {
-                                let c = confirm('Are you sure you want to discard this article?');
-
-                                if (c) {
-                                    console.log('User clicked ok')
-                                    window.location.href = "/admin/articles"
-                                } else {
-                                    console.log('user clicked cancel')
-                                }
-                            }, false);
-
-                            categorySelection.addEventListener('change', function() {
-                                document.getElementById('category').value = categorySelection.value
-                            })
-                        </script>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div id="preview-area">
+
+                </div>
+            </div>
+            <script>
+                let cancelButton = document.getElementById('cancel-button');
+                let categorySelection = document.getElementById('categorySelection');
+
+                document.getElementById('category').value = categorySelection.value
+
+                //Confirm user wants to cancel creating article.
+                cancelButton.addEventListener('click', function() {
+                    let c = confirm('Are you sure you want to discard this article?');
+
+                    if (c) {
+                        console.log('User clicked ok')
+                        window.location.href = "/admin/articles"
+                    } else {
+                        console.log('user clicked cancel')
+                    }
+                }, false);
+
+                categorySelection.addEventListener('change', function() {
+                    document.getElementById('category').value = categorySelection.value
+                })
+
+                //Preview scripts using ajax to request sanitized preview data.
+                function showPreview(title, category, body, notes) {
+                    let xml = new XMLHttpRequest();
+                    xml.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            document.getElementById('preview-area').innerHTML = this.responseText;
+                        }
+                    };
+                    xml.open("GET", "/article/preview?title=" + title + '&category=' + category + '&body=' + body + '&notes=' + notes, true);
+                    xml.send();
+                }
+
+                //Getting elements to input into ajax request
+                let previewButton = document.getElementById('preview-button');
+                let notes = document.getElementById('notes');
+                let body = document.getElementById('body');
+                let title = document.getElementById('title');
+                let category = document.getElementById("categorySelection");
+                let value = category.value;
+                let categoryText = category.options[category.selectedIndex].text;
+
+
+                //Run the ajax request on clicking the preview button
+                previewButton.addEventListener('click', function() {
+                    showPreview(title.value, categoryText, body.value, notes.value);
+                })
+            </script>
 </div>
 <?php require_once('includes/footer.php'); ?>
 </body>
