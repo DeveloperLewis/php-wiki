@@ -128,6 +128,7 @@
 
                 </div>
             </div>
+
             <script>
                 let cancelButton = document.getElementById('cancel-button');
                 let categorySelection = document.getElementById('categorySelection');
@@ -175,7 +176,6 @@
 
 
                 //Run the ajax request on clicking the preview button
-                //TODO: Add async to this function because it can get slow with larger data. Add error if user tries spamming it.
                 previewButton.addEventListener('click', function() {
                     showPreview(title.value, categoryText, body.value, notes.value);
                     window.location.href = "#preview-area";

@@ -62,24 +62,65 @@
                                     </div>
 
                                     <div class="col-6">
-                                        <div class="card text-bg-success mb-3" style="max-width: 18rem;">
-                                            <div class="card-body" onclick="sendToUsers()" style="cursor: pointer;">
-                                                <h5 class="card-title">View Users<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                        <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
+                                            <div class="card-body" onclick="sendToCreateCategory()" style="cursor: pointer;">
+                                                <h5 class="card-title">New Category<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
                             <div class="col-md-6">
-                                <?php
-                                if (isset($articles)) {
-                                    foreach ($articles as $k => $v) {
-                                        ?>
+                                <div class="row">
+                                <div class="col-6">
+                                    <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                                        <div class="card-body" onclick="sendToImages()" style="cursor: pointer;">
+                                            <h5 class="card-title">View Images<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                        </div>
+                                        <div class="card-footer">Total Images Uploaded - <strong></strong></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card text-bg-warning text-white mb-3" style="max-width: 18rem;">
+                                        <div class="card-body" onclick="sendToUsers()" style="cursor: pointer;">
+                                            <h5 class="card-title">View Users<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                        </div>
+                                        <div class="card-footer">Total Users Registered - <strong></strong></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card text-bg-success mb-3" style="max-width: 18rem;">
+                                        <div class="card-body" onclick="sendToUploadImages()" style="cursor: pointer;">
+                                            <h5 class="card-title">Upload New Image<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="card text-bg-warning text-white mb-3" style="max-width: 18rem;">
+                                        <div class="card-body" onclick="sendToAddNewUser()" style="cursor: pointer;">
+                                            <h5 class="card-title">Register New User<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h2>Recent Article</h2>
+                                <hr>
+                                    <?php
+                                    if (isset($articles)) {
+                                        foreach ($articles as $k => $v) {
+                                            ?>
                                             <div class="card" style="height: 100%">
                                                 <div class="card-header">
-                                                   Recent Article
+                                                    Recent Article
                                                 </div>
 
                                                 <img class="card-img-top">
@@ -105,10 +146,37 @@
                                                     <small class="text-muted">Last updated: <?= substr($v['last_edited_date'], 0, 10) ?></small><span class="badge bg-primary float-end"><?= $category ?></span>
                                                 </div>
                                             </div>
-                                        <?php
+                                            <?php
+                                        }
                                     }
-                                }
-                                ?>
+                                    ?>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h2>Settings</h2>
+                                <hr>
+
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label for="category" class="form-label">Featured Categories </label>
+                                            <select class="form-select" id="categorySelection">
+                                                <?php
+                                                $result = \classes\models\article\Category::getAll();
+
+                                                if (!$result) {
+
+                                                } else {
+                                                    foreach ($result as $k => $v) {
+                                                        echo '<option value="' . $v['category_id'] . '">' . $v['category_name'] . '</option>';
+                                                    }
+                                                }
+
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -127,8 +195,8 @@
         location.href = '/admin/articles'
     }
 
-    function sendToUsers() {
-        location.href = '/admin/users'
+    function sendToCreateCategory() {
+        location.href = '/category/new'
     }
 
     function sendToCreateArticle() {

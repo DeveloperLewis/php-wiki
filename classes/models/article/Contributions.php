@@ -2,7 +2,6 @@
 
 namespace classes\models\article;
 
-//TODO: Show who contributed to each article.
 class Contributions
 {
     public int $article_id;

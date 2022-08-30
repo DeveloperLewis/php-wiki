@@ -28,6 +28,19 @@
 
     <div class="container mt-4">
         <div class="row">
+            <div class="col-9">
+                <h2>Recent Articles</h2>
+            </div>
+            <div class="col-lg-3">
+                <form class="input-group">
+                    <input type="search" class="form-control rounded" placeholder="Search Articles"/>
+                    <button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+            <hr class="mt-2">
+        </div>
+
+        <div class="row">
             <?php
                 if (isset($articles)) {
                     foreach ($articles as $k => $v) {
