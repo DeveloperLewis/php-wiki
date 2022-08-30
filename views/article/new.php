@@ -158,8 +158,10 @@
                             document.getElementById('preview-area').innerHTML = this.responseText;
                         }
                     };
-                    xml.open("GET", "/article/preview?title=" + title + '&category=' + category + '&body=' + body + '&notes=' + notes, true);
-                    xml.send();
+                    let params = "title=" + title + '&category=' + category + '&body=' + body + '&notes=' + notes;
+                    xml.open("POST", "/article/preview", true);
+                    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xml.send(params);
                 }
 
                 //Getting elements to input into ajax request
@@ -173,9 +175,11 @@
 
 
                 //Run the ajax request on clicking the preview button
+                //TODO: Add async to this function because it can get slow with larger data. Add error if user tries spamming it.
                 previewButton.addEventListener('click', function() {
                     showPreview(title.value, categoryText, body.value, notes.value);
-                })
+                    window.location.href = "#preview-area";
+                });
             </script>
 </div>
 <?php require_once('includes/footer.php'); ?>
