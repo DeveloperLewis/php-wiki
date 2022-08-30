@@ -138,6 +138,7 @@ class Validation
     function purifyHtml(string $string): string {
         $config = \HTMLPurifier_config::createDefault();
         $purifier = new \HTMLPurifier($config);
+        $config->set('HTML.AllowedAttributes', 'a.href');
 
         return $purifier->purify($string);
     }

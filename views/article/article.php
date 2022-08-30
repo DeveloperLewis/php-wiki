@@ -17,24 +17,37 @@
     } else {
         ?>
 
-        <div class="container">
-            <div class="card m-4">
-                <div class="row">
-                    <div class="col">
-                        <h2 class="text-center card m-2"><?= $article['title']?></h2>
+            <div class="container-fluid mt-4" style="max-width: 1100px;">
+                <div class="card">
+                    <div class="card-header">
+                        <small class="text-muted">Written By: <?php $author = \classes\models\user\User::getName($article['original_author']); echo $author['first_name'] ?>, </small>
+                        <small class="text-muted">Written On: <?= substr($article['creation_date'], 0, 10); ?> </small>
+                        <span class="badge bg-primary float-end">People</span>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class=""><?= $article['title']?></h2>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p><?= $article['body']?><p>
+
+                                    <?php
+                                    if (!empty($article['notes'])) {
+                                        echo '<hr>';
+                                        echo '<p>' . $article['notes'] . '<p>';
+                                    }
+                                    ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col card m-3">
-                        <p class="text-center"><?= $article['body']?><p>
-                        <hr>
-                        <p class="text-center"><?= $article['notes']?><p>
-                    </div>
-                </div>
-
             </div>
-        </div>
     <?php
         }
     ?>
