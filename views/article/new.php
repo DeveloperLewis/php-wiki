@@ -115,7 +115,7 @@
 
                             <div>
                                 <button class="btn btn-danger float-start" type="button" id="cancel-button">Cancel</button>
-                                <button class="btn btn-primary float-end" type="submit">Create Article</button>
+                                <button class="btn btn-primary float-end" type="submit">Create</button>
                                 <button class="btn btn-primary float-end mx-2" type="button" id="preview-button">Preview</button>
                             </div>
                         </form>

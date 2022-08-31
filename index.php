@@ -27,5 +27,9 @@ require_once('routes/article.php');
 require_once('routes/admin.php');
 require_once('routes/category.php');
 
+$router->get('/tests', function() {
+   require_once('controllers/tests.php');
+});
+
 //Run the router after everything has processed
 $router->run();

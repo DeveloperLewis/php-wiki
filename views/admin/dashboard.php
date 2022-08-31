@@ -31,7 +31,7 @@
                                                 $articles_count = 0;
                                             }
                                             ?>
-                                            <div class="card-footer">Total Categories Created - <strong><?= $articles_count ?></strong></div>
+                                            <div class="card-footer">Total Articles Created - <strong><?= $articles_count ?></strong></div>
                                         </div>
                                     </div>
 
@@ -112,44 +112,37 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <h2>Recent Article</h2>
+                                <h2>Site Stats</h2>
                                 <hr>
-                                    <?php
-                                    if (isset($articles)) {
-                                        foreach ($articles as $k => $v) {
-                                            ?>
-                                            <div class="card" style="height: 100%">
-                                                <div class="card-header">
-                                                    Recent Article
-                                                </div>
 
-                                                <img class="card-img-top">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><?= $v['title']?></h5>
-                                                    <hr>
-                                                    <p class="card-text"><?php
-                                                        if (strlen($v['body']) > 200) {
-                                                            $v['body'] = substr($v['body'], 0, 200) . '...';
-                                                            echo $v['body'];
-                                                        }
-                                                        ?> <a href="/article?id=<?= $v['article_id']; ?>">Read more.</a></p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <?php
-                                                    $category_arr = \classes\models\article\Category::getById($v['category_ids']);
-                                                    if (!empty($category_arr)) {
-                                                        $category = $category_arr['category_name'];
-                                                    } else {
-                                                        $category = "None found";
-                                                    }
-                                                    ?>
-                                                    <small class="text-muted">Last updated: <?= substr($v['last_edited_date'], 0, 10) ?></small><span class="badge bg-primary float-end"><?= $category ?></span>
-                                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center">Site Visits</h5>
                                             </div>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
+                                            <div class="card-footer">76 - Visits</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center">Total Views</h5>
+                                            </div>
+                                            <div class="card-footer">348844 - Views</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center">Storage Used</h5>
+                                            </div>
+                                            <div class="card-footer">532 - MB</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-md-6">
