@@ -51,12 +51,12 @@
                             <table class="table table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Author</th>
-                                    <th scope="col">Category</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Edit</th>
-                                    <th scope="col">Delete</th>
+                                    <th scope="col" class="lato-strong">Title</th>
+                                    <th scope="col" class="lato-strong">Author</th>
+                                    <th scope="col" class="lato-strong">Category</th>
+                                    <th scope="col" class="lato-strong">Date</th>
+                                    <th scope="col" class="lato-strong">Edit</th>
+                                    <th scope="col" class="lato-strong">Delete</th>
                                 </tr>
                                 </thead>
                                 <tbody>

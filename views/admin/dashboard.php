@@ -155,28 +155,17 @@
                             <div class="col-md-6">
                                 <h2>Settings</h2>
                                 <hr>
-
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label for="category" class="form-label">Featured Categories </label>
-                                            <select class="form-select" id="categorySelection">
-                                                <?php
-                                                $result = \classes\models\article\Category::getAll();
-
-                                                if (!$result) {
-
-                                                } else {
-                                                    foreach ($result as $k => $v) {
-                                                        echo '<option value="' . $v['category_id'] . '">' . $v['category_name'] . '</option>';
-                                                    }
-                                                }
-
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item selectable" onclick="changeTab('general-tab')">
+                                        <p class="nav-link user-select-none active" id="general-tab">General</p>
+                                    </li>
+                                    <li class="nav-item selectable" onclick="changeTab('account-tab')">
+                                        <p class="nav-link user-select-none" id="account-tab">Account</p>
+                                    </li>
+                                    <li class="nav-item selectable" onclick="changeTab('display-tab')">
+                                        <p class="nav-link user-select-none" id="display-tab">Display</p>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -201,6 +190,15 @@
 
     function sendToCreateArticle() {
         location.href = '/article/new'
+    }
+
+    function changeTab(newTab) {
+        let currentTab = document.getElementsByClassName('active');
+        currentTab[1].classList.remove('active');
+
+        let changeTo = document.getElementById(newTab);
+        changeTo.classList.add('active');
+
     }
 </script>
 </body>
