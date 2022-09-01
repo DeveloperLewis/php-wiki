@@ -22,7 +22,7 @@
                                     <div class="col-6">
                                         <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
                                             <div class="card-body" onclick="sendToArticles()" style="cursor: pointer;">
-                                                <h5 class="card-title">View Articles<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                                <h5 class="card-title">Manage Articles<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                             </div>
                                             <?php
                                             if ($count_arr_articles = \classes\models\article\Article::getTotalCount($_SESSION['uid'])) {
@@ -38,7 +38,7 @@
                                     <div class="col-6">
                                         <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
                                             <div class="card-body" onclick="sendToCategories()" style="cursor: pointer;">
-                                                <h5 class="card-title">View Categories<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                                <h5 class="card-title">Manage Categories<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                             </div>
                                             <?php
                                             if ($count_arr_categories = \classes\models\article\Category::getTotalCount()) {
@@ -76,7 +76,7 @@
                                 <div class="col-6">
                                     <div class="card text-bg-success mb-3" style="max-width: 18rem;">
                                         <div class="card-body" onclick="sendToImages()" style="cursor: pointer;">
-                                            <h5 class="card-title">View Images<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                            <h5 class="card-title">Manage Images<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                         </div>
                                         <div class="card-footer">Total Images Uploaded - <strong></strong></div>
                                     </div>
@@ -84,7 +84,7 @@
                                 <div class="col-6">
                                     <div class="card text-bg-warning text-white mb-3" style="max-width: 18rem;">
                                         <div class="card-body" onclick="sendToUsers()" style="cursor: pointer;">
-                                            <h5 class="card-title">View Users<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                            <h5 class="card-title">Manage Users<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                         </div>
                                         <div class="card-footer">Total Users Registered - <strong></strong></div>
                                     </div>
@@ -100,11 +100,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="card text-bg-warning text-white mb-3" style="max-width: 18rem;">
-                                        <div class="card-body" onclick="sendToAddNewUser()" style="cursor: pointer;">
-                                            <h5 class="card-title">Register New User<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                             </div>
@@ -170,19 +166,31 @@
 
 <script>
     function sendToCategories() {
-        location.href = '/admin/categories'
+        location.href = '/admin/categories';
     }
 
     function sendToArticles() {
-        location.href = '/admin/articles'
+        location.href = '/admin/articles';
     }
 
     function sendToCreateCategory() {
-        location.href = '/category/new'
+        location.href = '/category/new';
     }
 
     function sendToCreateArticle() {
-        location.href = '/article/new'
+        location.href = '/article/new';
+    }
+
+    function sendToUsers() {
+        location.href = '/admin/users';
+    }
+
+    function sendToImages() {
+        location.href = '/admin/images';
+    }
+
+    function sendToUploadImages() {
+        location.href = '/image/new';
     }
 
     function changeTab(newTab) {
