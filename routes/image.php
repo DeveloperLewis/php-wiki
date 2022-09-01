@@ -8,3 +8,7 @@ $router->get('/image/new', function() {
 $router->post('/image/new', function() {
     require_once('controllers/image/new.php');
 });
+
+$router->post('/image/delete', function() {
+    require_once('controllers/image/delete.php');
+});

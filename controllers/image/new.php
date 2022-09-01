@@ -14,6 +14,13 @@ if (isset($_SESSION['uid'])) {
                     die();
             }
 
+            if (empty($_FILES['file']["tmp_name"])) {
+                session_start();
+                $_SESSION['error'] = "The file upload is empty.";
+                header('Location: /image/new');
+                die();
+            }
+
             $target_dir = "public/imgs/";
             $target_file = $target_dir . basename($_FILES['file']['name']);
             $target_file_type = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -56,7 +63,13 @@ if (isset($_SESSION['uid'])) {
             }
 
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-                $image = new \classes\models\media\Image($target_file, $_FILES['file']['size'], $_SESSION['uid']);
+                $timezone = 'Europe/London';
+                $timestamp = time();
+                $dt = new DateTime("now", new DateTimeZone($timezone));
+                $dt->setTimestamp($timestamp);
+                $upload_date = $dt->format('d/m/Y');
+
+                $image = new \classes\models\media\Image($target_file, $_FILES['file']['size'], $_SESSION['uid'], $upload_date);
                 if (!$image->store()) {
                     session_start();
                     $_SESSION['error'] = "The file data failed to store in the database, but still saved on the server. Contact Administrator.";

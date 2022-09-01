@@ -20,12 +20,19 @@
                 unset($_SESSION['success']);
             }
 
+            if (isset($_SESSION['error'])) {
+                echo '<div class="alert alert-danger" role="alert">';
+                echo $_SESSION['error'];
+                echo '</div>';
+
+                unset($_SESSION['error']);
+            }
+
             if (!$images_array = \classes\models\media\Image::getAll()) {
                 echo '<div class="alert alert-danger" role="alert">';
                 echo "No images found, try uploading some!";
                 echo '</div>';
 
-                unset($_SESSION['success']);
             }
             ?>
 
@@ -40,20 +47,22 @@
 
 
                 <div class="col-xl-2 mt-1">
-                    <div class="card selectable" onClick="imageSettings(this.id)" id="<?= $image['image_id'] ?>">
-                        <img class="card-img-top" src="../../<?= $image['location'] ?>" height="150">
+                    <div class="card selectable" id="<?= $image['image_id'] ?>">
+                        <img class="card-img-top" src="../../<?= $image['location'] ?>" height="160">
                         <div class="card-body">
                                 <small class="float-start text-muted"><?php
                                     $functions = new \classes\Functions();
                                     echo round($functions->convertBytes($image['storage_size'], "kb")). 'kb';
                                     ?>
+
+                                    <br><?= $image['upload_date']?>
                                 </small>
 
-                                <small class="float-end text-muted"><?php
-                                    $uploader_name = \classes\models\user\User::getName($image['uploader_id']);
-                                    echo $uploader_name['first_name'];
-                                    ?>
-                                </small>
+                                <form action="/image/delete" method="post" class="float-end">
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                    <input type="hidden" value="<?= $image['location']?>" name="location">
+                                    <input type="hidden" value="<?= $image['image_id']?>" name="id">
+                                </form>
                         </div>
                     </div>
                 </div>
@@ -78,12 +87,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    function imageSettings(id) {
-        alert(id);
-    }
-</script>
 <?php require_once('includes/footer.php'); ?>
 </body>
 </html>
