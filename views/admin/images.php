@@ -19,15 +19,54 @@
 
                 unset($_SESSION['success']);
             }
+
+            if (!$images_array = \classes\models\media\Image::getAll()) {
+                echo '<div class="alert alert-danger" role="alert">';
+                echo "No images found, try uploading some!";
+                echo '</div>';
+
+                unset($_SESSION['success']);
+            }
             ?>
+
             <hr>
         </div>
 
-        <div class="image">
+        <div class="images">
+            <div class="row">
 
+                <?php if (is_array($images_array)) { ?>
+                <?php foreach ($images_array as $image) { ?>
+
+
+                <div class="col-xl-2 mt-1">
+                    <div class="card selectable" onClick="imageSettings(this.id)" id="<?= $image['image_id'] ?>">
+                        <img class="card-img-top" src="../../<?= $image['location'] ?>" height="150">
+                        <div class="card-body">
+                                <small class="float-start text-muted"><?php
+                                    $functions = new \classes\Functions();
+                                    echo round($functions->convertBytes($image['storage_size'], "kb")). 'kb';
+                                    ?>
+                                </small>
+
+                                <small class="float-end text-muted"><?php
+                                    $uploader_name = \classes\models\user\User::getName($image['uploader_id']);
+                                    echo $uploader_name['first_name'];
+                                    ?>
+                                </small>
+                        </div>
+                    </div>
+                </div>
+
+                <?php
+                    }
+                }
+                ?>
+
+            </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-2">
             <div class="col">
                 <div class="float-start">
                     <a class="btn btn-danger" href="/admin/dashboard"><i class="fa-solid fa-arrow-left"></i> Go Back</a>
@@ -39,6 +78,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function imageSettings(id) {
+        alert(id);
+    }
+</script>
 <?php require_once('includes/footer.php'); ?>
 </body>
 </html>

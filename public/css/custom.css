@@ -11,6 +11,7 @@
     cursor: pointer;
 }
 
-.image {
-
+.thumbnail {
+    border: 2px solid lightgrey;
+    border-radius: 5px;
 }
