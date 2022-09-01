@@ -47,7 +47,7 @@
 
 
                 <div class="col-xl-2 mt-1">
-                    <div class="card selectable" id="<?= $image['image_id'] ?>">
+                    <div class="card" id="<?= $image['image_id'] ?>">
                         <img class="card-img-top" src="../../<?= $image['location'] ?>" height="160">
                         <div class="card-body">
                                 <small class="float-start text-muted"><?php

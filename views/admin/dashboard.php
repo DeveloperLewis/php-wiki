@@ -78,7 +78,7 @@
                                         <div class="card-body" onclick="sendToImages()" style="cursor: pointer;">
                                             <h5 class="card-title">Manage Images<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                         </div>
-                                        <div class="card-footer">Total Images Uploaded - <strong></strong></div>
+                                        <div class="card-footer">Total Images Uploaded - <strong><?= \classes\models\media\Image::getTotalCount() ?></strong></div>
                                     </div>
                                 </div>
                                 <div class="col-6">

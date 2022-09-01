@@ -124,7 +124,7 @@ class Article
 
     //Return all articles
     public static function getAll($uid): bool|array {
-        $sql = "SELECT * FROM articles WHERE original_author = ?";
+        $sql = "SELECT * FROM articles WHERE original_author = ? ORDER BY article_id DESC ";
 
         //Database connection
         $database = new \classes\Database();

@@ -80,4 +80,25 @@ class Image
 
         return true;
     }
+
+    public static function getTotalCount(): bool|int {
+        $sql = "SELECT COUNT(image_id) FROM images";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetch()) {
+            return false;
+        }
+        //The total amount of articles based on the user
+        return $result['COUNT(image_id)'];
+
+    }
 }

@@ -49,7 +49,7 @@ class Category
 
     //Return all category objects as an array
     public static function getAll(): array|bool {
-        $sql = "SELECT * FROM categories;";
+        $sql = "SELECT * FROM categories ORDER BY category_id DESC";
 
         //Database connection
         $database = new \classes\Database();
