@@ -13,7 +13,18 @@
         </div>
 
         <div class="col-md-6">
+
+            <?php
+            if (isset($_SESSION['error'])) {
+                echo '<div class="alert alert-danger" role="alert">';
+                echo $_SESSION['error'];
+                echo '</div>';
+
+                unset($_SESSION['error']);
+            }
+            ?>
             <div class="d-flex justify-content-center">
+
                 <form action="/image/new" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <input type="file" accept=".jpg, .jpeg, .png, .gif" name="file" id="file" >

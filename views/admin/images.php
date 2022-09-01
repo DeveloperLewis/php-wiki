@@ -11,6 +11,15 @@
 
         <div class="text-center m-4">
             <h1>Images</h1>
+            <?php
+            if (isset($_SESSION['success'])) {
+                echo '<div class="alert alert-success" role="alert">';
+                echo $_SESSION['success'];
+                echo '</div>';
+
+                unset($_SESSION['success']);
+            }
+            ?>
             <hr>
         </div>
 
