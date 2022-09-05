@@ -46,14 +46,14 @@
                 <?php foreach ($images_array as $image) { ?>
 
 
-                <div class="col-xl-2 mt-1">
+                <div class="col-xl-2 mt-3">
                     <div class="card" id="<?= $image['image_id'] ?>">
                         <img class="card-img-top" src="../../<?= $image['location'] ?>" height="160">
                         <div class="card-body">
-                                <small class="float-start text-muted"><?php
+                                <small class="float-start text-muted"><strong><?php
                                     $functions = new \classes\Functions();
                                     echo round($functions->convertBytes($image['storage_size'], "kb")). 'kb';
-                                    ?>
+                                        ?></strong>
 
                                     <br><?= $image['upload_date']?>
                                 </small>

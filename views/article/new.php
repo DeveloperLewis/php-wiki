@@ -83,8 +83,29 @@
 
                                 ?>
 
-                                <label for="body" class="form-label">Body: </label>
-                                <textarea class="form-control" id="body" name="body" style="resize: none; height: 600px;"><?php
+                                <!--
+                                    Main Text Editor
+                                -->
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item dropdown">
+                                        <p class="nav-link dropdown-toggle rounded-0 active selectable" data-bs-toggle="dropdown" id="headings-button">H1</p>
+                                        <ul class="dropdown-menu">
+                                            <li><p class="dropdown-item selectable" id="h1-button">H1</p></li>
+                                            <li><p class="dropdown-item selectable" id="h2-button">H2</p></li>
+                                            <li><p class="dropdown-item selectable" id="h3-button">H3</p></li>
+                                            <li><p class="dropdown-item selectable" id="h4-button">H4</p></li>
+                                            <li><p class="dropdown-item selectable" id="h5-button">H5</p></li>
+                                            <li><p class="dropdown-item selectable" id="h6-button">H6</p></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0" aria-current="page" href="#">Active</p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0" href="#">Link</p>
+                                    </li>
+                                </ul>
+                                <textarea class="form-control border-top-0 rounded-0" id="body" name="body" style="resize: none; height: 600px; outline: none; box-shadow: none;"><?php
                                     if(isset($_SESSION['body_previous'])) { echo $_SESSION['body_previous']; }
                                     unset($_SESSION['body_previous']);
                                     ?></textarea>
@@ -181,6 +202,8 @@
                     window.location.href = "#preview-area";
                 });
             </script>
+
+    <script type="text/javascript" src="../public/js/textEditor.js"></script>
 </div>
 <?php require_once('includes/footer.php'); ?>
 </body>
