@@ -21,11 +21,28 @@ function wrap(tagOne, tagTwo) {
     let selection = text.slice(start, after)
     let afterText = text.slice(after, text.length);
 
-    console.log(beforeText + tagOne + selection + tagTwo + afterText);
     textarea.value = beforeText + tagOne + selection + tagTwo + afterText;
 }
 
-//Event Listeners
+//General Event Listeners
+let bold = document.getElementById("bold-button");
+bold.addEventListener("click", function() {
+    wrap("<strong>", "</strong>");
+});
+
+let italic = document.getElementById("italic-button");
+italic.addEventListener("click", function() {
+    wrap("<em>", "</em>");
+});
+
+let underline = document.getElementById("underline-button");
+underline.addEventListener("click", function() {
+    wrap("<u>", "</u>");
+});
+
+
+
+//Headings Event Listeners
 let h1 = document.getElementById("h1-button");
 h1.addEventListener("click", function() {
     wrap("<h1>", "</h1>");
@@ -54,4 +71,31 @@ h5.addEventListener("click", function() {
 let h6 = document.getElementById("h6-button");
 h6.addEventListener("click", function() {
     wrap("<h6>", "</h6>");
+});
+
+
+//Page-layout Event Listeners
+let br = document.getElementById("br-button");
+br.addEventListener("click", function() {
+    wrap('<br>', '</br>') ;
+});
+
+let hr = document.getElementById("hr-button");
+hr.addEventListener("click", function() {
+    wrap('<hr>', '</hr>') ;
+});
+
+let code = document.getElementById("code-button");
+code.addEventListener("click", function() {
+    wrap('<code>', '</code>') ;
+});
+
+let link = document.getElementById("link-button");
+link.addEventListener("click", function() {
+   wrap('<a href="Your Link Here">', '</a>') ;
+});
+
+let media = document.getElementById("media-button");
+media.addEventListener("click", function() {
+    wrap() ;
 });

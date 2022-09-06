@@ -87,8 +87,17 @@
                                     Main Text Editor
                                 -->
                                 <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="bold-button"><strong>B</strong></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="italic-button"><em>i</em></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="underline-button"><u>U</u></p>
+                                    </li>
                                     <li class="nav-item dropdown">
-                                        <p class="nav-link dropdown-toggle rounded-0 active selectable" data-bs-toggle="dropdown" id="headings-button">H1</p>
+                                        <p class="nav-link dropdown-toggle rounded-0 selectable" data-bs-toggle="dropdown" id="headings-button">Aa</p>
                                         <ul class="dropdown-menu">
                                             <li><p class="dropdown-item selectable" id="h1-button">H1</p></li>
                                             <li><p class="dropdown-item selectable" id="h2-button">H2</p></li>
@@ -99,10 +108,19 @@
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <p class="nav-link rounded-0" aria-current="page" href="#">Active</p>
+                                        <p class="nav-link rounded-0 selectable" id="br-button">Br</p>
                                     </li>
                                     <li class="nav-item">
-                                        <p class="nav-link rounded-0" href="#">Link</p>
+                                        <p class="nav-link rounded-0 selectable" id="hr-button">Hr</p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="code-button"><i class="fa-solid fa-code"></i></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="link-button"><i class="fa-solid fa-link"></i></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="media-button"><i class="fa-solid fa-image"></i></p>
                                     </li>
                                 </ul>
                                 <textarea class="form-control border-top-0 rounded-0" id="body" name="body" style="resize: none; height: 600px; outline: none; box-shadow: none;"><?php
