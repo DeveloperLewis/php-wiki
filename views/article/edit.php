@@ -173,7 +173,7 @@
 
         if (c) {
             console.log('User clicked ok')
-            window.location.href = "/admin/articles"
+            window.location.href = "/admin/articles?amount=0"
         } else {
             console.log('user clicked cancel')
         }

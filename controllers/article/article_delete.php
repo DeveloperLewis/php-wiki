@@ -8,10 +8,10 @@ if(isset($_SESSION['uid'])) {
 
                 if (!\classes\models\article\Article::delete($id)) {
                     $_SESSION['delete_error'] = "There was an error trying to delete this article, please refresh the page and try again.";
-                    header('Location: /admin/articles');
+                    header('Location: /admin/articles?amount=0');
                     die();
                 }
-                header('Location: /admin/articles');
+                header('Location: /admin/articles?amount=0');
                 die();
             }
         }

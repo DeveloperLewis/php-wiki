@@ -170,7 +170,7 @@
     }
 
     function sendToArticles() {
-        location.href = '/admin/articles';
+        location.href = '/admin/articles?amount=0';
     }
 
     function sendToCreateCategory() {

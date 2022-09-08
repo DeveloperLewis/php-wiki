@@ -6,7 +6,7 @@ $router->get('/admin/dashboard', function() {
     require_once('controllers/admin/admin_dashboard.php');
 });
 
-$router->get('/admin/articles', function() {
+$router->get('/admin/articles', function($params) {
     require_once('controllers/admin/admin_articles.php');
 });
 

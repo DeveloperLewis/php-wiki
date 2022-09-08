@@ -98,7 +98,7 @@ if(isset($_SESSION['uid'])) {
             //Otherwise create a session for the user and let them know the article was stored successfully
             session_start();
             $_SESSION['success'] = "The article was successfully stored in the database.";
-            header('Location: /admin/articles');
+            header('Location: /admin/articles?amount=0');
             die();
         }
         else {

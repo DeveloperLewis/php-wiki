@@ -9,7 +9,7 @@ if(isset($_SESSION['uid'])) {
             if (!$article = \classes\models\article\Article::getSpecified($article_id)) {
                 //some error to send through to articles panel via sessions
 
-                header('Location: /admin/articles');
+                header('Location: /admin/articles?amount=0');
                 die();
             }
             require_once('views/article/edit.php');
@@ -92,7 +92,7 @@ if(isset($_SESSION['uid'])) {
             //Otherwise create a session for the user and let them know the article was stored successfully
             session_start();
             $_SESSION['success'] = "The article was successfully edited.";
-            header('Location: /admin/articles');
+            header('Location: /admin/articles?amount=0');
             die();
         }
     }

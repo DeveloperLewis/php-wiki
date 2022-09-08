@@ -171,6 +171,29 @@ class Article
         return $result;
     }
 
+    public static function pagination($uid, $amount, $offset): bool|array {
+        $sql = "SELECT * FROM articles WHERE original_author = ? ORDER BY article_id DESC LIMIT " . $amount . " OFFSET " . $offset;
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$articles = $stmt->fetchAll()) {
+            return false;
+        }
+
+        //articles for pagination
+        return $articles;
+    }
+
     public static function delete($article_id): bool {
         $sql = "DELETE FROM articles WHERE article_id = ?";
 
