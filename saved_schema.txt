@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 01, 2022 at 10:37 PM
+-- Generation Time: Sep 08, 2022 at 02:32 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -31,7 +31,8 @@ CREATE TABLE `articles` (
   `creation_date` tinytext NOT NULL,
   `last_edited_date` tinytext NOT NULL,
   `last_edited_by_author` int(11) NOT NULL,
-  `category_ids` mediumtext DEFAULT NULL
+  `category_ids` mediumtext DEFAULT NULL,
+  `views` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -67,7 +68,8 @@ CREATE TABLE `images` (
   `image_id` int(11) NOT NULL,
   `location` varchar(300) NOT NULL,
   `storage_size` int(11) NOT NULL,
-  `uploader_id` int(11) NOT NULL
+  `uploader_id` int(11) NOT NULL,
+  `upload_date` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

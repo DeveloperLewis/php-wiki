@@ -233,4 +233,53 @@ class Article
         //the most recent articles
         return $result;
     }
+
+    public static function getArticleViews(int $article_id): bool|int {
+        $sql = "SELECT views FROM articles WHERE article_id = ?";
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $article_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetchAll()) {
+            return false;
+        }
+
+        //returns views for specified article
+        return $result[0]['views'];
+    }
+
+    public static function updateViewCounter(int $article_id): bool {
+        //Get current views of article
+        $views = self::getArticleViews($article_id);
+
+        //Add 1 more view to article views.
+        $views += 1;
+
+        //Update this in the database for the next time.
+        $sql = "UPDATE articles SET views = ? WHERE article_id = ?";
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $views, \PDO::PARAM_INT);
+        $stmt->bindParam(2, $article_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        return true;
+    }
 }
