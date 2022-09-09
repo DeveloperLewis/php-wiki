@@ -103,6 +103,46 @@
                                 }
 
                                 ?>
+                                <!--
+                                    Main Text Editor
+                                -->
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="bold-button"><strong>B</strong></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="italic-button"><em>i</em></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="underline-button"><u>U</u></p>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <p class="nav-link dropdown-toggle rounded-0 selectable" data-bs-toggle="dropdown" id="headings-button">Aa</p>
+                                        <ul class="dropdown-menu">
+                                            <li><p class="dropdown-item selectable" id="h1-button">H1</p></li>
+                                            <li><p class="dropdown-item selectable" id="h2-button">H2</p></li>
+                                            <li><p class="dropdown-item selectable" id="h3-button">H3</p></li>
+                                            <li><p class="dropdown-item selectable" id="h4-button">H4</p></li>
+                                            <li><p class="dropdown-item selectable" id="h5-button">H5</p></li>
+                                            <li><p class="dropdown-item selectable" id="h6-button">H6</p></li>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="br-button">Br</p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="hr-button">Hr</p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="code-button"><i class="fa-solid fa-code"></i></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="link-button"><i class="fa-solid fa-link"></i></p>
+                                    </li>
+                                    <li class="nav-item">
+                                        <p class="nav-link rounded-0 selectable" id="media-button" data-bs-toggle="modal" data-bs-target="#images-modal"><i class="fa-solid fa-image"></i></p>
+                                    </li>
+                                </ul>
 
                                 <label for="body" class="form-label">Body: </label>
                                 <textarea class="form-control" id="body" name="body" style="resize: none; height: 600px;"><?php
@@ -162,6 +202,64 @@
         </div>
     </div>
 
+        <!-- Images Selection Modal -->
+        <div class="modal modal-lg fade" id="images-modal">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Select an Uploaded Image</h5>
+                    </div>
+                    <div class="modal-body">
+                        <?php
+                        if (!$images_array = \classes\models\media\Image::getAll()) {
+                            echo '<div class="alert alert-danger" role="alert">';
+                            echo "No images found, try uploading some!";
+                            echo '</div>';
+
+                        }
+                        ?>
+
+                        <div class="images">
+                            <div class="row">
+
+                                <?php if (is_array($images_array)) { ?>
+                                    <?php foreach ($images_array as $image) { ?>
+
+
+                                        <div class="col-xl-3 mt-3">
+                                            <div class="card" id="<?= $image['image_id'] ?>">
+                                                <img class="card-img-top" src="../../<?= $image['location'] ?>" height="160">
+                                                <div class="card-body">
+                                                    <small class="float-start text-muted"><strong><?php
+                                                            $functions = new \classes\Functions();
+                                                            echo round($functions->convertBytes($image['storage_size'], "kb")). 'kb';
+                                                            ?></strong>
+
+                                                        <br><?= $image['upload_date']?>
+                                                    </small>
+
+                                                    <div class="float-end">
+                                                        <button type="submit" class="btn btn-primary" onclick="insertImageTag('../../<?= $image['location'] ?>')" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-check"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                    }
+                                }
+                                ?>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 <script>
     let cancelButton = document.getElementById('cancel-button');
     let categorySelection = document.getElementById('categorySelection');
@@ -213,6 +311,8 @@
         window.location.href = "#preview-area";
     });
 </script>
+
+<script type="text/javascript" src="../public/js/textEditor.js?1"></script>
 </div>
 <?php require_once('includes/footer.php'); ?>
 </body>

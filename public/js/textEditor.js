@@ -24,6 +24,21 @@ function wrap(tagOne, tagTwo) {
     textarea.value = beforeText + tagOne + selection + tagTwo + afterText;
 }
 
+function insertImageTag(imgUrl) {
+    let selections = getSelections("body");
+    let start = selections[0];
+    let after = selections[1];
+
+    let text = textarea.value;
+
+    let beforeText = text.slice(0, start);
+    let afterText = text.slice(after, text.length);
+
+    let imgTag =  '<img src="' + imgUrl + '" alt="Describe Image" width="300" height="200">';
+
+    textarea.value = beforeText + imgTag + afterText;
+}
+
 //General Event Listeners
 let bold = document.getElementById("bold-button");
 bold.addEventListener("click", function() {
@@ -95,7 +110,4 @@ link.addEventListener("click", function() {
    wrap('<a href="Your Link Here">', '</a>') ;
 });
 
-let media = document.getElementById("media-button");
-media.addEventListener("click", function() {
-    wrap() ;
-});
+

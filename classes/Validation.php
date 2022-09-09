@@ -57,9 +57,9 @@ class Validation
             $body_errors['max_size'] = "The body must be less than 5000000 characters. You're currently at: " . strlen($body) . ".";
         }
 
-        if (preg_match('/[^a-zA-Z\d#\-=.,:;\/*@!\[\]()`<>\s"]/', $body)) {
+        if (preg_match('/[^a-zA-Z\d#\-=.,:;\/*@!\[\]()_`<>\s%"]/', $body)) {
             $body_errors['special_chars'] = "The body can only contain letters, numbers and these
-            special characters: #-=.,:;/_*@![]()`<>";
+            special characters: #-=.,:;/_*@![]()`<>% as well as quotation marks.";
         }
 
 
@@ -139,6 +139,7 @@ class Validation
         $config = \HTMLPurifier_config::createDefault();
         $purifier = new \HTMLPurifier($config);
         $config->set('HTML.AllowedAttributes', 'a.href');
+        $config->set('HTML.AllowedAttributes', 'src, height, width, alt');
 
         return $purifier->purify($string);
     }

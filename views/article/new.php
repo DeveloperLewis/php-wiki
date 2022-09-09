@@ -120,9 +120,10 @@
                                         <p class="nav-link rounded-0 selectable" id="link-button"><i class="fa-solid fa-link"></i></p>
                                     </li>
                                     <li class="nav-item">
-                                        <p class="nav-link rounded-0 selectable" id="media-button"><i class="fa-solid fa-image"></i></p>
+                                        <p class="nav-link rounded-0 selectable" id="media-button" data-bs-toggle="modal" data-bs-target="#images-modal"><i class="fa-solid fa-image"></i></p>
                                     </li>
                                 </ul>
+
                                 <textarea class="form-control border-top-0 rounded-0" id="body" name="body" style="resize: none; height: 600px; outline: none; box-shadow: none;"><?php
                                     if(isset($_SESSION['body_previous'])) { echo $_SESSION['body_previous']; }
                                     unset($_SESSION['body_previous']);
@@ -158,7 +159,7 @@
                                 <button class="btn btn-primary float-end mx-2" type="button" id="preview-button">Preview</button>
                             </div>
                         </form>
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -167,6 +168,64 @@
 
                 </div>
             </div>
+
+                <!-- Images Selection Modal -->
+                <div class="modal modal-lg fade" id="images-modal">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Select an Uploaded Image</h5>
+                            </div>
+                            <div class="modal-body">
+                                <?php
+                                if (!$images_array = \classes\models\media\Image::getAll()) {
+                                    echo '<div class="alert alert-danger" role="alert">';
+                                    echo "No images found, try uploading some!";
+                                    echo '</div>';
+
+                                }
+                                ?>
+
+                                <div class="images">
+                                    <div class="row">
+
+                                        <?php if (is_array($images_array)) { ?>
+                                            <?php foreach ($images_array as $image) { ?>
+
+
+                                                <div class="col-xl-3 mt-3">
+                                                    <div class="card" id="<?= $image['image_id'] ?>">
+                                                        <img class="card-img-top" src="../../<?= $image['location'] ?>" height="160">
+                                                        <div class="card-body">
+                                                            <small class="float-start text-muted"><strong><?php
+                                                                    $functions = new \classes\Functions();
+                                                                    echo round($functions->convertBytes($image['storage_size'], "kb")). 'kb';
+                                                                    ?></strong>
+
+                                                                <br><?= $image['upload_date']?>
+                                                            </small>
+
+                                                            <div class="float-end">
+                                                                <button type="submit" class="btn btn-primary" onclick="insertImageTag('../../<?= $image['location'] ?>')" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-check"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                            }
+                                        }
+                                        ?>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             <script>
                 let cancelButton = document.getElementById('cancel-button');
@@ -221,7 +280,7 @@
                 });
             </script>
 
-    <script type="text/javascript" src="../public/js/textEditor.js"></script>
+    <script type="text/javascript" src="../public/js/textEditor.js?1"></script>
 </div>
 <?php require_once('includes/footer.php'); ?>
 </body>
