@@ -10,7 +10,7 @@ if (isset($_SESSION['uid'])) {
             if (!$category = \classes\models\article\Category::getById($category_id)) {
                 //some error to send through to articles panel via sessions
 
-                header('Location: /admin/categories');
+                header('Location: /admin/categories?amount=0');
                 die();
             }
 
@@ -41,7 +41,7 @@ if (isset($_SESSION['uid'])) {
 
             session_start();
             $_SESSION['success'] = "Successfully edited the category from " .  $_POST['previous'] . " to " . $_POST['name'] ;
-            header('Location: /admin/categories');
+            header('Location: /admin/categories?amount=0');
             die();
         }
     }

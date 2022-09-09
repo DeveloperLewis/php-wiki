@@ -10,11 +10,11 @@ $router->get('/admin/articles', function($params) {
     require_once('controllers/admin/admin_articles.php');
 });
 
-$router->get('/admin/categories', function() {
+$router->get('/admin/categories', function($params) {
     require_once('controllers/admin/admin_categories.php');
 });
 
-$router->get('/admin/images', function() {
+$router->get('/admin/images', function($params) {
     require_once('controllers/admin/admin_images.php');
 });
 

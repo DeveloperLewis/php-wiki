@@ -1,3 +1,7 @@
+<?php
+/* @var $params */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +32,7 @@
                 unset($_SESSION['error']);
             }
 
-            if (!$images_array = \classes\models\media\Image::getAll()) {
+            if (!$images_array = \classes\models\media\Image::pagination(12, $params['amount'])) {
                 echo '<div class="alert alert-danger" role="alert">';
                 echo "No images found, try uploading some!";
                 echo '</div>';
@@ -77,12 +81,46 @@
 
         <div class="row mt-2">
             <div class="col">
-                <div class="float-start">
-                    <a class="btn btn-danger" href="/admin/dashboard"><i class="fa-solid fa-arrow-left"></i> Go Back</a>
+                <div class="col">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-danger" href="/admin/dashboard"><i class="fa-solid fa-arrow-left"></i> Go Back</a>
+
+                        <?php
+                        //pagination button controller
+                        $total_amount = \classes\models\media\Image::getTotalCount();
+                        $limit_amount = 12;
+                        $max_pagination_items = 3;
+                        ?>
+
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link <?php if (($params['amount'] - 12) < 0) { echo "disabled"; }?>" href="/admin/images?amount=<?= $params['amount'] - 12 ?>" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <?php
+                                $current_pagination_items = 0;
+                                for ($i = $params['amount']; $i < $total_amount; $i += $limit_amount) {
+                                    $current_pagination_items++;
+                                    if ($current_pagination_items < 4) {
+                                        echo ' <li class="page-item"><a class="page-link" href="/admin/images?amount=' . $i .'">' . $i / 12 .'</a></li>';
+                                    }
+                                }
+                                ?>
+                                <li class="page-item">
+                                    <a class="page-link <?php if (($params['amount'] + 12) > $total_amount) { echo "disabled"; }?>" href="/admin/images?amount=<?= $params['amount'] + 12 ?>" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <a class="btn btn-primary" href="/image/new">Upload New</a>
+
+                    </div>
                 </div>
-                <div class="float-end">
-                    <a class="btn btn-primary" href="/image/new">Upload New</a>
-                </div>
+            </div>
             </div>
         </div>
     </div>

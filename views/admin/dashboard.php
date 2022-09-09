@@ -166,7 +166,7 @@
 
 <script>
     function sendToCategories() {
-        location.href = '/admin/categories';
+        location.href = '/admin/categories?amount=0';
     }
 
     function sendToArticles() {
@@ -186,7 +186,7 @@
     }
 
     function sendToImages() {
-        location.href = '/admin/images';
+        location.href = '/admin/images?amount=0';
     }
 
     function sendToUploadImages() {

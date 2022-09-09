@@ -26,7 +26,7 @@ if (isset($_SESSION['uid'])) {
 
             session_start();
             $_SESSION['success'] = "Successfully added a new category.";
-            header('Location: /admin/categories');
+            header('Location: /admin/categories?amount=0');
             die();
 
         } else {

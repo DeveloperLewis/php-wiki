@@ -101,4 +101,26 @@ class Image
         return $result['COUNT(image_id)'];
 
     }
+
+    public static function pagination($amount, $offset): bool|array {
+        $sql = "SELECT * FROM images ORDER BY image_id DESC LIMIT " . $amount . " OFFSET " . $offset;
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$images = $stmt->fetchAll()) {
+            return false;
+        }
+
+        //articles for pagination
+        return $images;
+    }
 }

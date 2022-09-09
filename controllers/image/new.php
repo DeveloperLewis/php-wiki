@@ -79,7 +79,7 @@ if (isset($_SESSION['uid'])) {
 
                 session_start();
                 $_SESSION['success'] = "File was uploaded successfully!";
-                header('Location: /admin/images');
+                header('Location: /admin/images?amount=0');
                 die();
             } else {
                 session_start();

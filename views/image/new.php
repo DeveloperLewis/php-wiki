@@ -58,7 +58,7 @@
 
         if (c) {
             console.log('User clicked ok')
-            window.location.href = "/admin/images"
+            window.location.href = "/admin/images?amount=0"
         } else {
             console.log('user clicked cancel')
         }

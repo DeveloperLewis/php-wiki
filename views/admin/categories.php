@@ -1,3 +1,7 @@
+<?php
+/* @var $params */
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,8 +58,7 @@
                                         unset($_SESSION['success']);
                                     }
 
-                                    //If the getAll() method failed, then display this
-                                    if (!$categories_array = \classes\models\article\Category::getAll()) {
+                                    if (!$categories_array = \classes\models\article\Category::pagination(10, $params['amount'])) {
                                         echo '<div class="alert alert-danger m-2" role="alert">';
                                         echo "Fetch for categories failed or none exist, try creating a new category!";
                                         echo '</div>';
@@ -99,11 +102,43 @@
                                     <div class="mt-4">
                                         <div class="row">
                                             <div class="col">
-                                                <div class="float-start">
+                                                <div class="d-flex justify-content-between align-items-center">
                                                     <a class="btn btn-danger" href="/admin/dashboard"><i class="fa-solid fa-arrow-left"></i> Go Back</a>
-                                                </div>
-                                                <div class="float-end">
-                                                    <a class="btn btn-primary float-end" href="/category/new">Create New</a>
+
+                                                    <?php
+                                                    //pagination button controller
+                                                    $ta = \classes\models\article\Category::getTotalCount();
+                                                    $total_amount = $ta['COUNT(category_id)'];
+                                                    $limit_amount = 10;
+                                                    $max_pagination_items = 3;
+                                                    ?>
+
+                                                    <nav>
+                                                        <ul class="pagination">
+                                                            <li class="page-item">
+                                                                <a class="page-link <?php if (($params['amount'] - 10) < 0) { echo "disabled"; }?>" href="/admin/categories?amount=<?= $params['amount'] - 10 ?>" aria-label="Previous">
+                                                                    <span aria-hidden="true">&laquo;</span>
+                                                                </a>
+                                                            </li>
+                                                            <?php
+                                                            $current_pagination_items = 0;
+                                                            for ($i = $params['amount']; $i < $total_amount; $i += $limit_amount) {
+                                                                $current_pagination_items++;
+                                                                if ($current_pagination_items < 4) {
+                                                                    echo ' <li class="page-item"><a class="page-link" href="/admin/categories?amount=' . $i .'">' . $i / 10 .'</a></li>';
+                                                                }
+                                                            }
+                                                            ?>
+                                                            <li class="page-item">
+                                                                <a class="page-link <?php if (($params['amount'] + 10) > $total_amount) { echo "disabled"; }?>" href="/admin/categories?amount=<?= $params['amount'] + 10 ?>" aria-label="Next">
+                                                                    <span aria-hidden="true">&raquo;</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </nav>
+
+                                                    <a class="btn btn-primary" href="/category/new">Create New</a>
+
                                                 </div>
                                             </div>
                                         </div>

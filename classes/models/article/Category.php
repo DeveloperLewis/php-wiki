@@ -201,4 +201,26 @@ class Category
 
         return false;
     }
+
+    public static function pagination($amount, $offset): bool|array {
+        $sql = "SELECT * FROM categories ORDER BY category_id DESC LIMIT " . $amount . " OFFSET " . $offset;
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$categories = $stmt->fetchAll()) {
+            return false;
+        }
+
+        //categories for pagination
+        return $categories;
+    }
 }

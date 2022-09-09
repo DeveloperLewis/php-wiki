@@ -47,7 +47,7 @@
                                     <input type="hidden" name="previous" value="<?php if (isset($category['category_name'])) { echo $category['category_name']; }?>">
 
                                     <button class="btn btn-primary mt-2 float-end" type="submit">Save</button>
-                                    <a class="btn btn-danger mt-2 float-start" href="/admin/categories">Cancel</a>
+                                    <a class="btn btn-danger mt-2 float-start" href="/admin/categories?amount=0">Cancel</a>
                                 </form>
                             </div>
                             <div class="col-md-4">

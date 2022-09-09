@@ -10,20 +10,20 @@ if (isset($_SESSION['uid'])) {
             if (!unlink($img_location)) {
                 session_start();
                 $_SESSION['error'] = "Failed to delete the image.";
-                header('Location: /admin/images');
+                header('Location: /admin/images?amount=0');
                 die();
             }
 
             if (!\classes\models\media\Image::deleteById($img_id)) {
                 session_start();
                 $_SESSION['error'] = "Failed to delete the image data.";
-                header('Location: /admin/images');
+                header('Location: /admin/images?amount=0');
                 die();
             }
 
             session_start();
             $_SESSION['success'] = "The file was successfully deleted.";
-            header('Location: /admin/images');
+            header('Location: /admin/images?amount=0');
             die();
         }
     }
