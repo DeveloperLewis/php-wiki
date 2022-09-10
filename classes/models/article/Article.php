@@ -331,4 +331,27 @@ class Article
 
         return $total_views;
     }
+
+    public static function getByCategory($category_id): bool|array {
+        $sql = "SELECT * FROM articles WHERE category_ids = ?";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $category_id, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetchAll()) {
+            return false;
+        }
+
+        //return articles queried by category id
+        return $result;
+    }
 }

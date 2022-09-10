@@ -34,3 +34,7 @@ $router->post('/article/delete', function() {
 $router->post('/article/preview', function () {
     require_once('controllers/article/article_preview.php');
 });
+
+$router->get('/article/search', function($params) {
+   require_once('controllers/article/article_search.php');
+});

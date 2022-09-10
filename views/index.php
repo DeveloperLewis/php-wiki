@@ -28,14 +28,36 @@
 
     <div class="container mt-4">
         <div class="row">
-            <div class="col-9">
+            <div class="col-lg-8">
                 <h2>Recent Articles</h2>
             </div>
-            <div class="col-lg-3">
-                <form class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search Articles"/>
-                    <button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </form>
+            <div class="col-lg-4">
+                <div class="float-end" style="margin-left: 10px;">
+                    <form class="input-group">
+                        <input type="search" class="form-control rounded" placeholder="Search Articles"/>
+                        <button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+
+                <div class="float-end">
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</button>
+                        <ul class="dropdown-menu" style="height: 300px; overflow-y: auto;">
+                            <?php
+                            $result = \classes\models\article\Category::getAll();
+
+                            if (!$result) {
+
+                            } else {
+                                foreach ($result as $k => $v) {
+                                    echo '<li><a class="dropdown-item" href="article/search?category=' . $v['category_id'] . '">' . $v['category_name'] . '</a></li>';
+                                }
+                            }
+
+                            ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <hr class="mt-2">
         </div>
