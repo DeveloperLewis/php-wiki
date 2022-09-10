@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-
+    session_start();
     if (isset($_GET['category'])) {
         if (!$articles = \classes\models\article\Article::getByCategory($_GET['category'])) {
             //TODO: Err message to display

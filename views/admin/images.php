@@ -49,10 +49,12 @@
                 <?php if (is_array($images_array)) { ?>
                 <?php foreach ($images_array as $image) { ?>
 
-
+                <!--
+                    Each Uploaded Image Card
+                -->
                 <div class="col-xl-2 mt-3">
                     <div class="card" id="<?= $image['image_id'] ?>">
-                        <img class="card-img-top" src="../../<?= $image['location'] ?>" height="160">
+                        <img class="card-img-top selectable" src="../../<?= $image['location'] ?>" height="160" onclick="enlargeImage('../../' + '<?= $image['location']; ?>')">
                         <div class="card-body">
                                 <small class="float-start text-muted"><strong><?php
                                     $functions = new \classes\Functions();
@@ -125,6 +127,31 @@
         </div>
     </div>
 </div>
+
+    <!-- Larger Image modal -->
+        <div class="modal fade" id="imgModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <img class="card-img-top" id="individualModalImg" src="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<script>
+    function enlargeImage(imgUrl) {
+        const myModal = new bootstrap.Modal(document.getElementById("imgModal"))
+        myModal.show();
+
+        document.getElementById("individualModalImg").src = imgUrl;
+    }
+</script>
+
 <?php require_once('includes/footer.php'); ?>
 </body>
 </html>

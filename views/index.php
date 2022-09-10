@@ -42,7 +42,7 @@
                 <div class="float-end">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Categories</button>
-                        <ul class="dropdown-menu" style="height: 300px; overflow-y: auto;">
+                        <ul class="dropdown-menu" style="max-height: 300px; overflow-y: auto;">
                             <?php
                             $result = \classes\models\article\Category::getAll();
 
@@ -77,6 +77,8 @@
                         <p class="card-text"><?php
                             if (strlen($v['body']) > 200) {
                                 $v['body'] = substr($v['body'], 0, 200) . '...';
+                                echo $v['body'];
+                            } else {
                                 echo $v['body'];
                             }
                             ?> <a href="/article?id=<?= $v['article_id']; ?>">Read more.</a></p>

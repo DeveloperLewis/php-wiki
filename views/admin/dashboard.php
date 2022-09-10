@@ -117,7 +117,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title text-center">Site Visits</h5>
                                             </div>
-                                            <div class="card-footer"><?= \classes\models\site\Visitor::totalVisitors() ?> - Visits</div>
+                                            <div class="card-footer"><?= \classes\models\site\Visitor::totalVisitors() ?> Visits</div>
                                         </div>
                                     </div>
 
@@ -126,7 +126,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title text-center">Article Views</h5>
                                             </div>
-                                            <div class="card-footer"><?= \classes\models\article\Article::totalArticleViewsForAll() ?> - Views</div>
+                                            <div class="card-footer"><?= \classes\models\article\Article::totalArticleViewsForAll() ?> Views</div>
                                         </div>
                                     </div>
 
