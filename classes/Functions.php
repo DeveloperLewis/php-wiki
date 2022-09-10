@@ -29,4 +29,49 @@ class Functions
             return "Type is not defined.";
         }
     }
+
+    public function totalStorageUsage(): bool|int {
+        $sql = 'SELECT table_schema "name", ROUND(SUM(data_length + index_length) / 1024 / 1024, 1) "mb" FROM information_schema.tables GROUP BY table_schema';
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$databases = $stmt->fetchAll()) {
+            return false;
+        }
+
+        $database_size = 0;
+        foreach($databases as $database) {
+            if ($database['name'] == "wiki") {
+                $database_size = round($database['mb']);
+            }
+        }
+
+        $sql = 'SELECT storage_size FROM images';
+
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$image_storages = $stmt->fetchAll()) {
+            return false;
+        }
+        $image_storage_size_bytes = 0;
+        foreach ($image_storages as $image_storage) {
+            $image_storage_size_bytes += $image_storage['storage_size'];
+        }
+
+        $image_storage_size_mb = round($this->convertBytes($image_storage_size_bytes, "mb"));
+
+        return $database_size + $image_storage_size_mb;
+    }
 }

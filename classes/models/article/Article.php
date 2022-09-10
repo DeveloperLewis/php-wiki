@@ -305,4 +305,30 @@ class Article
 
         return true;
     }
+
+    public static function totalArticleViewsForAll(): bool|int {
+        $sql = "SELECT views FROM articles";
+
+        //Database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //Prepared statements
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$article_views_arrays = $stmt->fetchAll()) {
+            return false;
+        }
+
+        $total_views = 0;
+        foreach ($article_views_arrays as $article_views_array) {
+            $total_views += $article_views_array['views'];
+        }
+
+        return $total_views;
+    }
 }

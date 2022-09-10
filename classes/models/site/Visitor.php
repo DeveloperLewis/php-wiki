@@ -27,4 +27,25 @@ class Visitor
 
         return true;
     }
+
+    public static function totalVisitors(): bool|int {
+        $sql = "SELECT COUNT(visitor_id) FROM visitors";
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        $stmt = $pdo->prepare($sql);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$count_array = $stmt->fetch()) {
+            return false;
+        }
+
+        //Total count
+        return $count_array['COUNT(visitor_id)'];
+    }
 }

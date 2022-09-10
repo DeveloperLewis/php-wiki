@@ -1,5 +1,5 @@
 <?php
-/* @var $articles */
+/* @var $functions */
 ?>
 
 <!DOCTYPE html>
@@ -112,30 +112,30 @@
                                 <hr>
 
                                 <div class="row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 mb-2">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title text-center">Site Visits</h5>
                                             </div>
-                                            <div class="card-footer">76 - Visits</div>
+                                            <div class="card-footer"><?= \classes\models\site\Visitor::totalVisitors() ?> - Visits</div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 mb-2">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title text-center">Total Views</h5>
+                                                <h5 class="card-title text-center">Article Views</h5>
                                             </div>
-                                            <div class="card-footer">348844 - Views</div>
+                                            <div class="card-footer"><?= \classes\models\article\Article::totalArticleViewsForAll() ?> - Views</div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 mb-2">
                                         <div class="card">
                                             <div class="card-body">
                                                 <h5 class="card-title text-center">Storage Used</h5>
                                             </div>
-                                            <div class="card-footer">532 - MB</div>
+                                            <div class="card-footer"><?= $functions->totalStorageUsage()?> MB</div>
                                         </div>
                                     </div>
                                 </div>
