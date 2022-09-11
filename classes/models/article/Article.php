@@ -354,4 +354,29 @@ class Article
         //return articles queried by category id
         return $result;
     }
+
+    public static function getByTitle($title): bool|array {
+        $sql = "SELECT * FROM articles WHERE title LIKE ?";
+        $wildcard = '%' . $title . '%';
+
+        //database connection
+        $database = new \classes\Database();
+        $pdo = $database->getPdo();
+
+        //prepared statements
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(1, $wildcard, \PDO::PARAM_INT);
+
+        if (!$stmt->execute()) {
+            return false;
+        }
+
+        if (!$result = $stmt->fetchAll()) {
+            return false;
+        }
+
+        //return articles by title
+        return $result;
+    }
+
 }

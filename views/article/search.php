@@ -20,9 +20,9 @@
         </div>
         <div class="col-lg-4">
             <div class="float-end" style="margin-left: 10px;">
-                <form class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search Articles"/>
-                    <button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <form class="input-group" action="/article/search" method="get">
+                    <input type="search" class="form-control rounded" placeholder="Search Articles" name="search"/>
+                    <button type="submit" class="btn btn-outline-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
             </div>
 

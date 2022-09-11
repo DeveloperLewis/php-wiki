@@ -7,6 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         }
     }
 
+    if (isset($_GET['search'])) {
+        if (!$articles = \classes\models\article\Article::getByTitle($_GET['search'])) {
+            //TODO: err message to display;
+        }
+    }
+
     require_once('views/article/search.php');
 }
 
