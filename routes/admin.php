@@ -17,7 +17,3 @@ $router->get('/admin/categories', function($params) {
 $router->get('/admin/images', function($params) {
     require_once('controllers/admin/admin_images.php');
 });
-
-$router->get('/admin/users', function() {
-    require_once('controllers/admin/admin_users.php');
-});

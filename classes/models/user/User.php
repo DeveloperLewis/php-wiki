@@ -158,4 +158,26 @@ namespace classes\models\user;
 
             return "function failed";
         }
+
+        //Get total count of users
+        public static function getTotalUsers(): bool|int {
+            $sql = "SELECT COUNT(uid) FROM users";
+
+            //database connection
+            $database = new \classes\Database();
+            $pdo = $database->getPdo();
+
+            $stmt = $pdo->prepare($sql);
+
+            if (!$stmt->execute()) {
+                return false;
+            }
+
+            if (!$result = $stmt->fetch()) {
+                return false;
+            }
+
+            //The total amount of articles based on the user
+            return $result['COUNT(uid)'];
+        }
     }

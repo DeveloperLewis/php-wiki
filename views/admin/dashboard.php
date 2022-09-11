@@ -16,11 +16,10 @@
             <div class="row">
                 <div class="col-12">
                     <div id="dashboard-panel">
-                        <div class="row">
-                            <div class="col-md-6">
+
                                 <div class="row">
-                                    <div class="col-6">
-                                        <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                                    <div class="col-4">
+                                        <div class="card text-bg-primary mb-3" style="">
                                             <div class="card-body" onclick="sendToArticles()" style="cursor: pointer;">
                                                 <h5 class="card-title">Manage Articles<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                             </div>
@@ -35,8 +34,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-6">
-                                        <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
+                                    <div class="col-4">
+                                        <div class="card text-bg-danger mb-3" style="">
                                             <div class="card-body" onclick="sendToCategories()" style="cursor: pointer;">
                                                 <h5 class="card-title">Manage Categories<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                             </div>
@@ -50,61 +49,43 @@
                                             <div class="card-footer">Total Categories Created - <strong><?= $categories_count ?></strong></div>
                                         </div>
                                     </div>
+
+                                    <div class="col-4">
+                                        <div class="card text-bg-success mb-3" style="">
+                                            <div class="card-body" onclick="sendToImages()" style="cursor: pointer;">
+                                                <h5 class="card-title">Manage Images<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                            </div>
+                                            <div class="card-footer">Total Images Uploaded - <strong><?= \classes\models\media\Image::getTotalCount() ?></strong></div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-6">
-                                        <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+                                    <div class="col-4">
+                                        <div class="card text-bg-primary mb-3" style="">
                                             <div class="card-body" onclick="sendToCreateArticle()" style="cursor: pointer;">
                                                 <h5 class="card-title">New Article<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-6">
-                                        <div class="card text-bg-danger mb-3" style="max-width: 18rem;">
+                                    <div class="col-4">
+                                        <div class="card text-bg-danger mb-3" style="">
                                             <div class="card-body" onclick="sendToCreateCategory()" style="cursor: pointer;">
                                                 <h5 class="card-title">New Category<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="row">
-                                <div class="col-6">
-                                    <div class="card text-bg-success mb-3" style="max-width: 18rem;">
-                                        <div class="card-body" onclick="sendToImages()" style="cursor: pointer;">
-                                            <h5 class="card-title">Manage Images<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
-                                        </div>
-                                        <div class="card-footer">Total Images Uploaded - <strong><?= \classes\models\media\Image::getTotalCount() ?></strong></div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="card text-bg-warning text-white mb-3" style="max-width: 18rem;">
-                                        <div class="card-body" onclick="sendToUsers()" style="cursor: pointer;">
-                                            <h5 class="card-title">Manage Users<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
-                                        </div>
-                                        <div class="card-footer">Total Users Registered - <strong></strong></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="card text-bg-success mb-3" style="max-width: 18rem;">
-                                        <div class="card-body" onclick="sendToUploadImages()" style="cursor: pointer;">
-                                            <h5 class="card-title">Upload New Image<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                    <div class="col-4">
+                                        <div class="card text-bg-success mb-3" style="">
+                                            <div class="card-body" onclick="sendToUploadImages()" style="cursor: pointer;">
+                                                <h5 class="card-title">Upload New Image<span class="float-end"><i class="fa-solid fa-share"></i></span></h5>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-
-                                </div>
                             </div>
-                            </div>
-                        </div>
 
                         <div class="row">
                             <div class="col-md-6">
@@ -138,6 +119,15 @@
                                             <div class="card-footer"><?= $functions->totalStorageUsage()?> MB</div>
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-4 mb-2">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center">Total Users</h5>
+                                            </div>
+                                            <div class="card-footer"><?= \classes\models\user\User::getTotalUsers() ?> Users</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -157,6 +147,7 @@
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
