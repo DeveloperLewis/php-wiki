@@ -63,6 +63,7 @@ class Image
         return $images;
     }
 
+    //Delete an image specified by an id. (Both database location and image on server)
     public static function deleteById($id): bool {
         $sql = "DELETE FROM images WHERE image_id = ?";
 
@@ -81,6 +82,7 @@ class Image
         return true;
     }
 
+    //Get the total amount of image locations in the database.
     public static function getTotalCount(): bool|int {
         $sql = "SELECT COUNT(image_id) FROM images";
 
@@ -102,6 +104,7 @@ class Image
 
     }
 
+    //Limit and offset the amount of image locations returned in the database, for pagination use.
     public static function pagination($amount, $offset): bool|array {
         $sql = "SELECT * FROM images ORDER BY image_id DESC LIMIT " . $amount . " OFFSET " . $offset;
 

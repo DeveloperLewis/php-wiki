@@ -66,6 +66,7 @@ class Article
         return true;
     }
 
+    //Update the queried article in the databse with new values
     public static function update($title, $body, $original_author, $shared, $notes, $categories, $article_id, $last_edited_date): bool {
         $sql = "UPDATE articles SET title = ?, body = ?, original_author = ?, shared = ?, last_edited_date = ?, notes = ?, category_ids = ? WHERE article_id = ?";
 
@@ -171,6 +172,7 @@ class Article
         return $result;
     }
 
+    //Return articles with an offset and limit for pagination usage
     public static function pagination($uid, $amount, $offset): bool|array {
         $sql = "SELECT * FROM articles WHERE original_author = ? ORDER BY article_id DESC LIMIT " . $amount . " OFFSET " . $offset;
 
@@ -194,6 +196,7 @@ class Article
         return $articles;
     }
 
+    //Delete specified article
     public static function delete($article_id): bool {
         $sql = "DELETE FROM articles WHERE article_id = ?";
 
@@ -212,6 +215,7 @@ class Article
         return true;
     }
 
+    //Return the total amount of articles a specified user has written.
     public static function getTotalCount($uid): bool|array {
         $sql = "SELECT COUNT(original_author) FROM articles WHERE original_author = ?";
 
@@ -235,6 +239,7 @@ class Article
 
     }
 
+    //Get a specified amount of articles
     public static function getRecent(int $amount): bool|array {
         $sql = "SELECT * FROM articles ORDER BY article_id DESC LIMIT " . $amount;
 
@@ -257,6 +262,7 @@ class Article
         return $result;
     }
 
+    //Return a specified article's views
     public static function getArticleViews(int $article_id): bool|int {
         $sql = "SELECT views FROM articles WHERE article_id = ?";
 
@@ -280,6 +286,7 @@ class Article
         return $result[0]['views'];
     }
 
+    //Update the views of an article by 1
     public static function updateViewCounter(int $article_id): bool {
         //Get current views of article
         $views = self::getArticleViews($article_id);
@@ -306,6 +313,7 @@ class Article
         return true;
     }
 
+    //Get total views of all articles
     public static function totalArticleViewsForAll(): bool|int {
         $sql = "SELECT views FROM articles";
 
@@ -332,6 +340,7 @@ class Article
         return $total_views;
     }
 
+    //Return articles specified by category
     public static function getByCategory($category_id): bool|array {
         $sql = "SELECT * FROM articles WHERE category_ids = ?";
 
@@ -355,6 +364,7 @@ class Article
         return $result;
     }
 
+    //Return articles specified by title
     public static function getByTitle($title): bool|array {
         $sql = "SELECT * FROM articles WHERE title LIKE ?";
         $wildcard = '%' . $title . '%';

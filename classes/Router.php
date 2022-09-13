@@ -5,7 +5,7 @@ namespace classes;
     class Router {
 
         //Handlers holds all the functions that you provide when routing.
-        private $handlers = [];
+        private array $handlers = [];
         private $notFound;
         private const get = 'GET';
         private const post = 'POST';
@@ -22,7 +22,7 @@ namespace classes;
             $this->notFound = $handler;
         }
 
-        private function createHandler($method, $path, $handler) {
+        private function createHandler($method, $path, $handler): void {
             $this->handlers[$method . $path] = [
                 'path' => $path,
                 'method' => $method,
@@ -31,7 +31,7 @@ namespace classes;
         }
 
 
-        public function run() {
+        public function run(): void {
             //Get url that the request is coming from
             $requestUri = parse_url($_SERVER['REQUEST_URI']);
             $requestPath = $requestUri['path'];

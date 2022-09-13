@@ -10,6 +10,7 @@ class Visitor
         $this->visit_date = $visit_date;
     }
 
+    //Store the date of a new visit in the database.
     public function store(): bool {
         $sql = "INSERT INTO visitors (visit_date) VALUES (?);";
 
@@ -28,6 +29,7 @@ class Visitor
         return true;
     }
 
+    //Return the total amount of visits to the website
     public static function totalVisitors(): bool|int {
         $sql = "SELECT COUNT(visitor_id) FROM visitors";
 

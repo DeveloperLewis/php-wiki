@@ -26,7 +26,6 @@ namespace classes;
 
         //Upon creating a database object, it will connect to the database.
         public function __construct(){
-
             $dsn = "$this->type:host=$this->server;dbname=$this->db;port=$this->port;charset=$this->charset";
 
             try {

@@ -4,12 +4,9 @@ namespace classes;
 
 class Validation
 {
-    //Validation methods for elements of the wiki
+    //Article Title validation.
     function title(string $title): array|bool {
-
-        //Initialize the array.
         $title_errors = [];
-
 
         //Validation rules.
         if (empty($title)) {
@@ -29,19 +26,15 @@ class Validation
              letters, numbers and the following special characters: !?:-.,";
         }
 
-
-        //Return the array if there are any errors.
         if (!empty($title_errors)) {
             return $title_errors;
         }
 
-        //Return true if there aren't any errors.
         return true;
     }
 
+    //Article Body validation.
     function body(string $body): array|bool {
-
-        //Initialize the array.
         $body_errors = [];
 
         //Validation rules.
@@ -62,23 +55,18 @@ class Validation
             special characters: #-=.,:;/_*@![]()`<>% as well as quotation marks.";
         }
 
-
-        //Return the array if there are any errors.
         if (!empty($body_errors)) {
             return $body_errors;
         }
 
-        //Return true if there aren't any errors.
         return true;
     }
 
+    //Article Notes validation.
     function notes(string $notes): array|bool {
-
-        //Initialize the array.
         $notes_errors = [];
 
         //Validation Rules.
-
         if (strlen($notes) > 10000) {
             $notes_errors['max_size'] = "The notes must be less than 10000 characters. You're currently at: " . strlen($notes) . ".";
         }
@@ -88,19 +76,15 @@ class Validation
              letters, numbers and the following special characters: !?:-.,";
         }
 
-        //Return the array if there are any errors.
         if (!empty($notes_errors)) {
             return $notes_errors;
         }
 
-        //Return true if there aren't any errors.
         return true;
-
     }
 
+    //Category Name validation
     function category(string $category): array|bool {
-
-        //Initialize the array.
         $category_errors = [];
 
         //Validation Rules.
@@ -125,22 +109,22 @@ class Validation
             $category_errors['not_unique'] = "This category already exists, please try another name.";
         }
 
-        //Return the array if there are any errors.
         if (!empty($category_errors)) {
             return $category_errors;
         }
 
-        //Return true if there aren't any errors.
         return true;
     }
 
-    //Cleans up the html that is dangerous and untrusted with html purifier.
+    //Sanitize any html that is given.
     function purifyHtml(string $string): string {
+        //Configuration rules for html purifier
         $config = \HTMLPurifier_config::createDefault();
         $purifier = new \HTMLPurifier($config);
         $config->set('HTML.AllowedAttributes', 'a.href');
         $config->set('HTML.AllowedAttributes', 'src, height, width, alt');
 
+        //Sanitized html is returned
         return $purifier->purify($string);
     }
 }

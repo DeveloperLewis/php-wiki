@@ -88,6 +88,7 @@ namespace classes\models\user;
             return $name;
         }
 
+        //Return the email of a user based on a specified id
         public static function getEmail($uid): bool|string {
             //Database connection
             $database = new \classes\Database();
@@ -201,6 +202,7 @@ namespace classes\models\user;
             return $result['COUNT(uid)'];
         }
 
+        //Verify that the password of a specified user matches that of the user in the database.
         public static function verifyPassword($uid, $password): bool {
             $sql = "SELECT password FROM users WHERE uid = ?";
             //Connect to database.
@@ -228,6 +230,7 @@ namespace classes\models\user;
             return true;
         }
 
+        //Change the specified user's password in the database.
         public static function changePassword($uid, $old_password, $new_password): bool {
             $sql = "SELECT * FROM users WHERE uid = ?";
             //Connect to database.

@@ -5,8 +5,9 @@ if (isset($_SESSION['uid'])) {
     if (\classes\models\user\User::isAdmin($_SESSION['uid'])) {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             require_once('views/image/new.php');
-        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //Image upload validation
             if ($_SERVER['CONTENT_LENGTH'] > 1000000) {
                     session_start();
                     $_SESSION['error'] = "The file must be less than 1mb.";
@@ -69,6 +70,7 @@ if (isset($_SESSION['uid'])) {
                 $dt->setTimestamp($timestamp);
                 $upload_date = $dt->format('d/m/Y');
 
+                //Store image data in the database
                 $image = new \classes\models\media\Image($target_file, $_FILES['file']['size'], $_SESSION['uid'], $upload_date);
                 if (!$image->store()) {
                     session_start();

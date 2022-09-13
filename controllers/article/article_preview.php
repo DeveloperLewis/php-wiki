@@ -5,13 +5,14 @@ $body = $_POST['body'];
 $category = $_POST['category'];
 $notes = $_POST['notes'];
 
+//Sanitize all the previewing data of an article
 $validator = new \classes\Validation();
 $title = $validator->purifyHtml($title);
 $body = $validator->purifyHtml($body);
 $notes = $validator->purifyHtml($notes);
 
 
-//Previewing HTML:
+//Display the sanitized output to the user
 ?>
 <?php if (isset($_POST['title']) && isset($_POST['body']) && isset($_POST['category']) && isset($_POST['notes'])) { ?>
 
