@@ -136,10 +136,10 @@
                                 <hr>
                                 <ul class="nav nav-tabs">
                                     <li class="nav-item selectable" onclick="changeTab('general-tab', 'general-settings')">
-                                        <p class="nav-link user-select-none active" id="general-tab">General</p>
+                                        <p class="nav-link user-select-none" id="general-tab">General</p>
                                     </li>
                                     <li class="nav-item selectable" onclick="changeTab('account-tab', 'account-settings')">
-                                        <p class="nav-link user-select-none" id="account-tab">Account</p>
+                                        <p class="nav-link user-select-none active" id="account-tab">Account</p>
                                     </li>
                                     <li class="nav-item selectable" onclick="changeTab('display-tab', 'display-settings')">
                                         <p class="nav-link user-select-none" id="display-tab">Display</p>
@@ -196,7 +196,7 @@
     let general = document.getElementById("general-settings");
     let display = document.getElementById("display-settings");
 
-    account.style.display = 'none';
+    general.style.display = 'none';
     display.style.display = 'none';
 
     function sendToCategories() {
