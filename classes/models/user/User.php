@@ -88,6 +88,26 @@ namespace classes\models\user;
             return $name;
         }
 
+        public static function getEmail($uid): bool|string {
+            //Database connection
+            $database = new \classes\Database();
+            $pdo = $database->getPdo();
+
+            //Prepared statements
+            $stmt = $pdo->prepare("SELECT email FROM users WHERE uid = ?");
+            $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
+
+            if (!$stmt->execute()) {
+                return false;
+            }
+
+            if (!$email = $stmt->fetch()) {
+                return false;
+            }
+
+            return $email['email'];
+        }
+
         //Return the date of which the user was created at.
         public static function getCreatedAt($uid): bool|array {
             //Database connection
@@ -179,5 +199,71 @@ namespace classes\models\user;
 
             //The total amount of articles based on the user
             return $result['COUNT(uid)'];
+        }
+
+        public static function verifyPassword($uid, $password): bool {
+            $sql = "SELECT password FROM users WHERE uid = ?";
+            //Connect to database.
+            $database = new \classes\Database();
+            $pdo = $database->getPdo();
+
+            //Prepared Statements.
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
+
+            if (!$stmt->execute()) {
+                return false;
+            }
+
+            if (!$user = $stmt->fetch()) {
+                return false;
+            }
+
+            $hashed = $user['password'];
+
+            if (!password_verify($password, $hashed)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static function changePassword($uid, $old_password, $new_password): bool {
+            $sql = "SELECT * FROM users WHERE uid = ?";
+            //Connect to database.
+            $database = new \classes\Database();
+            $pdo = $database->getPdo();
+
+            //Prepared Statements.
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(1, $uid, \PDO::PARAM_INT);
+
+            if (!$stmt->execute()) {
+                return false;
+            }
+
+            if (!$user = $stmt->fetch()) {
+                return false;
+            }
+
+            $old_hashed_password = $user['password'];
+
+            if (!password_verify($old_password, $old_hashed_password)) {
+                return false;
+            }
+
+            $new_hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+
+            $sql = "UPDATE users SET password = ? WHERE uid = ?";
+            $stmt = $pdo->prepare($sql);
+
+            $stmt->bindParam(1, $new_hashed_password, \PDO::PARAM_STR);
+            $stmt->bindParam(2, $uid, \PDO::PARAM_INT);
+
+            if (!$stmt->execute()) {
+                return false;
+            }
+
+            return true;
         }
     }

@@ -25,3 +25,14 @@ $router->post('/user/login', function() {
 $router->get('/user/logout', function() {
     require_once('controllers/user/user_logout.php');
 });
+
+
+
+$router->get('/user/change-password', function() {
+    require_once('controllers/user/user_change_password.php');
+});
+
+$router->post('/user/change-password', function() {
+   require_once('controllers/user/user_change_password.php');
+});
+

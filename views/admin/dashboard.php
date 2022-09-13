@@ -135,17 +135,52 @@
                                 <h2>Settings</h2>
                                 <hr>
                                 <ul class="nav nav-tabs">
-                                    <li class="nav-item selectable" onclick="changeTab('general-tab')">
+                                    <li class="nav-item selectable" onclick="changeTab('general-tab', 'general-settings')">
                                         <p class="nav-link user-select-none active" id="general-tab">General</p>
                                     </li>
-                                    <li class="nav-item selectable" onclick="changeTab('account-tab')">
+                                    <li class="nav-item selectable" onclick="changeTab('account-tab', 'account-settings')">
                                         <p class="nav-link user-select-none" id="account-tab">Account</p>
                                     </li>
-                                    <li class="nav-item selectable" onclick="changeTab('display-tab')">
+                                    <li class="nav-item selectable" onclick="changeTab('display-tab', 'display-settings')">
                                         <p class="nav-link user-select-none" id="display-tab">Display</p>
                                     </li>
                                 </ul>
-                            </div>
+
+                                <div id="account-settings" class="mt-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <?php
+                                                if (isset($_SESSION['password_changed'])) {
+                                                    echo '<div class="alert alert-success" role="alert">';
+                                                    echo $_SESSION['password_changed'];
+                                                    echo '</div>';
+
+                                                    unset($_SESSION['password_changed']);
+                                                }
+                                            ?>
+
+                                            <p><?= \classes\models\user\User::getEmail($_SESSION['uid']) ?></p>
+                                            <a class="btn btn-primary" href="/user/change-password">Change Password</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="general-settings" class="mt-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>General Settings</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="display-settings" class="mt-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>Display Settings</p>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
 
                     </div>
@@ -156,6 +191,14 @@
 <?php require_once('includes/footer.php'); ?>
 
 <script>
+
+    let account = document.getElementById("account-settings");
+    let general = document.getElementById("general-settings");
+    let display = document.getElementById("display-settings");
+
+    account.style.display = 'none';
+    display.style.display = 'none';
+
     function sendToCategories() {
         location.href = '/admin/categories?amount=0';
     }
@@ -184,14 +227,25 @@
         location.href = '/image/new';
     }
 
-    function changeTab(newTab) {
+    function changeTab(newTab, newPanel) {
         let currentTab = document.getElementsByClassName('active');
         currentTab[1].classList.remove('active');
 
         let changeTo = document.getElementById(newTab);
         changeTo.classList.add('active');
 
+        hideAll()
+
+        let changeToPanel = document.getElementById(newPanel);
+        changeToPanel.style.removeProperty('display');
     }
+
+    function hideAll() {
+        account.style.display = 'none';
+        display.style.display = 'none';
+        general.style.display = 'none';
+    }
+
 </script>
 </body>
 </html>
