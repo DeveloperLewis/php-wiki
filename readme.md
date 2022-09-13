@@ -1,10 +1,8 @@
 # A wikipedia built using my custom framework
-A fairly simple wikipedia that has admin accounts that can share between articles,
-a wysiwyg for ease of use, a backend system for managing your articles and more.
+A fairly simple wikipedia that has a backend for creting wiki articles.
+Features a complex text editor for ease of use, a backend cms for managing your articles and more.
 
-Almost completely coded from scratch using php. (Uses autoloading from composer because its magic and HTMLpurifier for security and sanitization.)
-
-
+Almost completely coded from scratch using html, css(bootstrap), javascript and php. (Uses autoloading from composer because its magic and HTMLpurifier for security and sanitization.)
 
 ## Installation
 
