@@ -22,7 +22,7 @@
                     <div class="card-header">
                         <small class="text-muted">Written By: <?php $author = \classes\models\user\User::getName($article['original_author']); echo $author['first_name'] ?>, </small>
                         <small class="text-muted">Written On: <?= substr($article['creation_date'], 0, 10); ?> </small>
-                        <span class="badge bg-primary float-end"><?php $cat = \classes\models\article\Category::getName($article['category_ids']); echo $cat['category_name']; ?></span>
+                        <span class="badge bg-primary float-end"><?php $cat = \classes\models\article\Category::getName($article['category_ids']); if (is_array($cat)) { echo $cat['category_name']; } else { echo "No Category"; }; ?></span>
                     </div>
 
                     <div class="card-body">

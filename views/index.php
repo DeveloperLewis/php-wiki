@@ -64,7 +64,7 @@
 
         <div class="row">
             <?php
-                if (isset($articles)) {
+                if (isset($articles) && is_array($articles)) {
                     foreach ($articles as $k => $v) {
             ?>
 
@@ -89,7 +89,7 @@
                             if (!empty($category_arr)) {
                                 $category = $category_arr['category_name'];
                             } else {
-                                $category = "None found";
+                                $category = "No Category";
                             }
                         ?>
                         <small class="text-muted">Last updated: <?= substr($v['last_edited_date'], 0, 10) ?></small><span class="badge bg-primary float-end"><?= $category ?></span>

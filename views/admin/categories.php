@@ -77,22 +77,24 @@
                                             <tbody>
                                             <?php
                                             //Show all categories in a table
-                                            foreach ($categories_array as $k => $v) {
-                                                echo '<tr>';
+                                            if (is_array($categories_array)) {
+                                                foreach ($categories_array as $k => $v) {
+                                                    echo '<tr>';
 
-                                                echo '<td style="width: 100%;">' . $v['category_name'] . '</td>';
+                                                    echo '<td style="width: 100%;">' . $v['category_name'] . '</td>';
 
-                                                echo '<form action="/category/edit" method="get">';
-                                                echo '<input type="hidden" value="' . $v['category_id'] .'" name="id">';
-                                                echo '<td><button class="btn btn-success" type="submit"><i class="fa-solid fa-eraser"></i></button></td>';
-                                                echo '</form>';
+                                                    echo '<form action="/category/edit" method="get">';
+                                                    echo '<input type="hidden" value="' . $v['category_id'] .'" name="id">';
+                                                    echo '<td><button class="btn btn-success" type="submit"><i class="fa-solid fa-eraser"></i></button></td>';
+                                                    echo '</form>';
 
-                                                echo '<form action="/category/delete" method="post">';
-                                                echo '<input type="hidden" value="' . $v['category_id'] .'" name="id">';
-                                                echo '<td><button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button></td>';
-                                                echo '</form>';
+                                                    echo '<form action="/category/delete" method="post">';
+                                                    echo '<input type="hidden" value="' . $v['category_id'] .'" name="id">';
+                                                    echo '<td><button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button></td>';
+                                                    echo '</form>';
 
-                                                echo '</tr>';
+                                                    echo '</tr>';
+                                                }
                                             }
                                             ?>
                                             </tbody>
