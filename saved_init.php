@@ -190,6 +190,15 @@ COMMIT;";
     if (!$stmt->execute()) {
         return false;
     }
+
+    $sql = "
+ALTER TABLE `articles`
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;";
+    $stmt = $pdo->prepare($sql);
+    if (!$stmt->execute()) {
+        return false;
+    }
 }
 
 init();

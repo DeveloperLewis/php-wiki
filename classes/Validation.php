@@ -119,7 +119,7 @@ class Validation
     //Sanitize any html that is given.
     function purifyHtml(string $string): string {
         //Configuration rules for html purifier
-        $config = \HTMLPurifier_config::createDefault();
+        $config = \HTMLPurifier_Config::createDefault();
         $purifier = new \HTMLPurifier($config);
         $config->set('HTML.AllowedAttributes', 'a.href');
         $config->set('HTML.AllowedAttributes', 'src, height, width, alt');
