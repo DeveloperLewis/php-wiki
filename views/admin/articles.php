@@ -43,7 +43,7 @@
 
                         if (!$articles_array = \classes\models\article\Article::pagination($_SESSION['uid'], 10, $params['amount'])) {
                             echo '<div class="alert alert-danger" role="alert">';
-                            echo "Fetch for categories failed or none exist, try creating a new category!";
+                            echo "Fetch for articles failed or none exist, try creating a new article!";
                             echo '</div>';
                         }
                         ?>
