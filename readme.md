@@ -10,7 +10,8 @@ Almost completely coded from scratch using html, css(bootstrap), javascript and 
 
 - `git clone https://github.com/DeveloperLewis/php-wiki`
 - `composer install`
-- Enter the `/classes/database.php` class and change the username and password to match your database login.
-- Enter the `init.php` and change the username and password to match your database login.
+- Enter the `/classes/database.php` class and change the username and password to match your environment.
+- Enter the `init.php` and change the username and password to match your environment.
+- Open the site and create an account.
 - After creating an account, you can enable them as an administrator by setting the "is_admin" column to true in the users table for your specified user.
 
